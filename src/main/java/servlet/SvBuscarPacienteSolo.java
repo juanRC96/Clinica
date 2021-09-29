@@ -53,10 +53,6 @@ public class SvBuscarPacienteSolo extends HttpServlet {
 					case "agregaratencion":
 						request.setAttribute("datosPaciente", pac);
 						request.getRequestDispatcher("agregarAtencion.jsp").forward(request, response);
-
-					default:
-						System.out.println("No hay rol");
-
 					}
 
 				} catch (Exception e) {
