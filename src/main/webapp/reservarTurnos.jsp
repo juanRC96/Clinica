@@ -36,7 +36,7 @@ $(function (){
 
 <form method="post" action="./svbuscarpacientesolo" action="reservarTurnos.jsp">
 	
-	
+	<input type=hidden name="rol" value="reservarturnos">
 	<p>Ingrese el DNI <input type=text name="dni" size=50></p>
 	<p><button type=submit>Buscar paciente</button></p>
 	

@@ -35,6 +35,7 @@ public class SvBuscarPacienteSolo extends HttpServlet {
 			LogicPacientes lp = new LogicPacientes();
 
 			String dniString = request.getParameter("dni");
+			String rol = request.getParameter("rol");
 
 			if (dniString != "") {
 
@@ -43,8 +44,20 @@ public class SvBuscarPacienteSolo extends HttpServlet {
 					p.setDni(dni);
 
 					Paciente pac = lp.buscarPacienteSolo(p);
-					request.setAttribute("datosPaciente", pac);
-					request.getRequestDispatcher("reservarTurnos.jsp").forward(request, response);
+
+					switch (rol) {
+					case "reservarturnos":
+						request.setAttribute("datosPaciente", pac);
+						request.getRequestDispatcher("reservarTurnos.jsp").forward(request, response);
+
+					case "agregaratencion":
+						request.setAttribute("datosPaciente", pac);
+						request.getRequestDispatcher("agregarAtencion.jsp").forward(request, response);
+
+					default:
+						System.out.println("No hay rol");
+
+					}
 
 				} catch (Exception e) {
 					response.sendRedirect("error.html");

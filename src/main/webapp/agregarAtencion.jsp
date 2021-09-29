@@ -34,11 +34,12 @@ $(function (){
 		<span style="font-family: Candara">Clinica UTN</span>
 	</h1>
 	<h2>
-		<span style="font-family: Candara">Reserva tu turno</span>
+		<span style="font-family: Candara">Registrar atención</span>
 	</h2>
 
-<form method="post" action="./svbuscarpacientesoloatencion" action="agregarAtencion.jsp">
+<form method="post" action="./svbuscarpacientesolo" action="agregarAtencion.jsp">
 	
+	<input type=hidden name="rol" value="agregaratencion">
 	<p>Ingrese el DNI: <input type=text name="dni" size=50></p>
 	
 	<p><button type=submit>Buscar paciente</button>
