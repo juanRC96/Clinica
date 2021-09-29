@@ -1,0 +1,40 @@
+@charset "ISO-8859-1";
+
+Body 
+{  
+  font-family: Candara;  
+  background-color: #CFCFCF;
+}  
+/* background-image: url(C:/Users/juani/eclipse-workspace/Clinica1/src/main/webapp/WEB-INF/resources/img/fondo.jpg);
+ background-image: url("https://cdn.discordapp.com/attachments/351120178408456192/886792799389900840/fondo.jpg"); */
+
+h2{
+	text-align: center;
+}
+
+form {    
+    margin: auto;
+    width: auto;
+    max-width: 400px;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+}   
+
+Button {   
+       background-color:#000000;
+       width: 200px;  
+       color: rgb(255, 255, 255);   
+       padding: 20px;   
+       margin: 5px;   
+       border: none;   
+       cursor: pointer;
+       font-family: Candara;
+       font-size: 20px;
+       text-align: center;
+       border-radius: 10px;
+        }
+    
+button:hover {
+	opacity: 0.5;
+}

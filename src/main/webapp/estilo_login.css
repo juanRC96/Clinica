@@ -1,0 +1,67 @@
+@charset "ISO-8859-1";
+
+Body {
+    font-family: 'Candara', sans-serif;
+	background-color: #CFCFCF; 
+    opacity: 1;
+    display: flex;
+    min-height: 100vh;
+}
+
+h3{
+	color: #000000;
+	font-size: 25px
+}
+
+Button {
+	background-color: #000000;
+	width: 200px;
+	color: rgb(255, 255, 255);
+	padding: 20px;
+	margin: 10px;
+	border: none;
+	cursor: pointer;
+	font-family: Candara;
+	font-size: 20px;
+	text-align: center;
+	border-radius: 10px;
+}
+
+.cancelbtn {
+	width: 200px;
+	padding: 15px;
+	margin: auto;
+	font-family: Candara;
+	text-align: center;
+}
+
+button:hover {
+	opacity: 0.5;
+}
+
+form {    
+	background-color: #959595;
+    margin: auto;
+    width: 90%;
+    max-width: 400px;
+    padding: 4.5em 3em;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%);
+    text-align: center;
+    font-style: #FFFFFF;
+}
+
+input[type=text], input[type=password] {
+	width: 100%;
+	margin: 8px 0;
+	padding: 12px 20px;
+	display: inline-block;
+	border: 2px solid(0, 0, 0);
+	box-sizing: border-box;
+	font-family: Candara;
+}
+
+.container {
+	padding: 25px;
+	background-color: (0, 0, 0);
+}
