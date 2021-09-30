@@ -11,35 +11,30 @@ public class DbConnector {
 	private static String dbpass = "1234";
 	private static String dbdriver = "com.mysql.cj.jdbc.Driver";
 
-	//CARGO EL CONTROLADOR
-    public static void cargarControlador(){
-        try 
-        {
-            Class.forName(dbdriver);
-        }
-        catch (ClassNotFoundException e) 
-        {
-            System.out.println("Error al cargar el controlador");
-            e.printStackTrace();
-        }
-    }
-    
-    //ESTABLEZCO LA CONEXION
-    public static Connection getConexion() {
-        Connection conexion = null;
-        
-        try 
-        {
-        	cargarControlador();
-            conexion = DriverManager.getConnection(dburl, dbuser, dbpass);
-            System.out.println("Conexión exitosa");
+	// CARGO EL CONTROLADOR
+	public static void cargarControlador() {
+		try {
+			Class.forName(dbdriver);
+		} catch (ClassNotFoundException e) {
+			System.out.println("Error al cargar el controlador");
+			e.printStackTrace();
+		}
+	}
 
-        } catch (SQLException e) 
-        {
-            System.out.println("Error en la conexión");
-            e.printStackTrace();
-        }
-        
-        return conexion;
-    }
+	// ESTABLEZCO LA CONEXION
+	public static Connection getConexion() {
+		Connection conexion = null;
+
+		try {
+			cargarControlador();
+			conexion = DriverManager.getConnection(dburl, dbuser, dbpass);
+			System.out.println("Conexión exitosa");
+
+		} catch (SQLException e) {
+			System.out.println("Error en la conexión");
+			e.printStackTrace();
+		}
+
+		return conexion;
+	}
 }

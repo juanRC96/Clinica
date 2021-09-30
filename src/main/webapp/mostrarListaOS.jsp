@@ -12,42 +12,42 @@
 
 <link rel="stylesheet" type="text/css" href="estilo_lista.css">
 
-<% 
-LinkedList<ObraSocial> obrassociales =(LinkedList)request.getAttribute("tablaOS");
+<%
+LinkedList<ObraSocial> obrassociales = (LinkedList) request.getAttribute("tablaOS");
 
 boolean vacia = obrassociales.isEmpty();
 
-if(vacia==false){
+if (vacia == false) {
 %>
 
 </head>
 <body>
 
 	<table>
-	
-	<td><b> ID </b></td>
-	<td><b> NOMBRE OBRA SOCIAL </b></td>
 
-	<%
-	for(ObraSocial o : obrassociales){
+		<td><b> ID </b></td>
+		<td><b> NOMBRE OBRA SOCIAL </b></td>
+
+		<%
+		for (ObraSocial o : obrassociales) {
 		%>
 		<tr>
 			<td><%=o.getId()%></td>
 			<td><%=o.getNombre()%></td>
 		</tr>
-		<% 
-	}
-}
-		else
-		{
+		<%
+		}
+		} else {
 		%>
-		   <h1>No hay obras sociales coincidentes</h1>
-		 
-		<%}
+		<h1>No hay obras sociales coincidentes</h1>
+
+		<%
+		}
 		%>
 	</table>
 
-<p>	<form method="post" action="menuObrasSociales.html">
+	<p>
+	<form method="post" action="menuObrasSociales.html">
 		<button id="logout" type="submit">Volver al menú</button>
 	</form>
 

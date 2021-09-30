@@ -3,7 +3,7 @@
 <%@page import="java.util.LinkedList"%>
 <%@page session="false"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,41 +15,49 @@
 </head>
 <body>
 
-<form method="post" action="./svmodificarpreciotrat">
-	<h1>
-		<span style="font-family: Candara">Clinica UTN</span>
-	</h1>
-	<h2>
-		<span style="font-family: Candara">Modificar precio tratamiento</span>
-	</h2>
-	
-<p>
-<%
-//CONSULTO LA LISTA DE TRATAMIENTOS
-LinkedList<Tratamiento> tratamientos = (LinkedList)request.getAttribute("tablaTratamientos");
-%>
-<p>Seleccione un tipo de tratamiento  <select name="tratamiento">
-			<option selected value="0">Elige una opción</option>
-<%
-for(Tratamiento t : tratamientos)
-{%>
-<option value=<%=t.getIdTratamiento() %>><%=t.getDescripcion()%></option>
-<%
-}
-%>
-</select>
-</p>
+	<form method="post" action="./svmodificarpreciotrat">
+		<h1>
+			<span style="font-family: Candara">Clinica UTN</span>
+		</h1>
+		<h2>
+			<span style="font-family: Candara">Modificar precio
+				tratamiento</span>
+		</h2>
 
-<p>Ingrese nuevo valor <input type=text name="precio" size=50></p>
+		<p>
+			<%
+			//CONSULTO LA LISTA DE TRATAMIENTOS
+			LinkedList<Tratamiento> tratamientos = (LinkedList) request.getAttribute("tablaTratamientos");
+			%>
+		
+		<p>
+			Seleccione un tipo de tratamiento <select name="tratamiento">
+				<option selected value="0">Elige una opción</option>
+				<%
+				for (Tratamiento t : tratamientos) {
+				%>
+				<option value=<%=t.getIdTratamiento()%>><%=t.getDescripcion()%></option>
+				<%
+				}
+				%>
+			</select>
+		</p>
 
-	<p>
-		<button id=bt1 type=submit>Aceptar</button>
-		<button id=bt2 type=reset>Borrar</button>
-	</p>
-	
-</form>
+		<p>
+			Ingrese nuevo valor <input type=text name="precio" size=50>
+		</p>
 
-<form method="post" action="menuTratamientos.html"><p><button id="bt3" type="submit">Volver</button></form>
+		<p>
+			<button id=bt1 type=submit>Aceptar</button>
+			<button id=bt2 type=reset>Borrar</button>
+		</p>
+
+	</form>
+
+	<form method="post" action="menuTratamientos.html">
+		<p>
+			<button id="bt3" type="submit">Volver</button>
+	</form>
 
 </body>
 </html>

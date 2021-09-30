@@ -13,44 +13,44 @@
 
 <link rel="stylesheet" type="text/css" href="estilo_lista.css">
 
-<% 
-Turno t =(Turno)request.getAttribute("turno");
+<%
+Turno t = (Turno) request.getAttribute("turno");
 %>
 </head>
 <body>
 
-<h1>El turno quedó registrado con los siguientes datos</h1>
+	<h1>El turno quedó registrado con los siguientes datos</h1>
 
-<%
-LogicTurnos lt = new LogicTurnos();
+	<%
+	LogicTurnos lt = new LogicTurnos();
 
-Turno tur = lt.buscarDatosTurno(t);
-
-%>
+	Turno tur = lt.buscarDatosTurno(t);
+	%>
 
 	<table>
-	
-	<td><b> APELLIDO DOCTOR </b></td>
-	<td><b> NOMBRE DOCTOR </b></td>
-	<td><b> FECHA TURNO</b></td>
-	<td><b> HORA TURNO</b></td>
-	<td><b> DNI PACIENTE </b></td>
-	<td><b> APELLIDO PACIENTE </b></td>
-	<td><b> NOMBRE PACIENTE </b></td>
+
+		<td><b> APELLIDO DOCTOR </b></td>
+		<td><b> NOMBRE DOCTOR </b></td>
+		<td><b> FECHA TURNO</b></td>
+		<td><b> HORA TURNO</b></td>
+		<td><b> DNI PACIENTE </b></td>
+		<td><b> APELLIDO PACIENTE </b></td>
+		<td><b> NOMBRE PACIENTE </b></td>
 
 		<tr>
-			<td><%=tur.getOdontologo().getApellido() %></td>
-			<td><%=tur.getOdontologo().getNombre() %></td>
-			<td><%=tur.getFecha() %></td>
-			<td><%=tur.getHora() %></td>
-			<td><%=tur.getPaciente().getDni() %></td>
-			<td><%=tur.getPaciente().getApellido() %></td>
-			<td><%=tur.getPaciente().getNombre() %></td>
+			<td><%=tur.getOdontologo().getApellido()%></td>
+			<td><%=tur.getOdontologo().getNombre()%></td>
+			<td><%=tur.getFecha()%></td>
+			<td><%=tur.getHora()%></td>
+			<td><%=tur.getPaciente().getDni()%></td>
+			<td><%=tur.getPaciente().getApellido()%></td>
+			<td><%=tur.getPaciente().getNombre()%></td>
 		</tr>
-	
+
 	</table>
 
-<p>	<form method="post" action="menuTurnos.html">
+	<p>
+	<form method="post" action="menuTurnos.html">
 		<button id="logout" type="submit">Volver al menú</button>
 	</form>
 

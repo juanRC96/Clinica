@@ -5,45 +5,48 @@
 <title>buscar turnos</title>
 
 <link rel="stylesheet" type="text/css" href="estilo_ingresarDatos.css">
-<link rel="stylesheet"		href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet"
+	href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-<script src= "https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src= "https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script> 
-
-$(function (){
-	$("#datepicker").datepicker();
-});
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+	$(function() {
+		$("#datepicker").datepicker();
+	});
 </script>
 
 </head>
 <body>
 
-<form method="post" action="./svbuscarturnosfecha">
-	<h1>
-		<span style="font-family: Candara">Clinica UTN</span>
-	</h1>
-	<h2>
-		<span style="font-family: Candara">Buscar turnos</span>
-	</h2>
-	
-<div>
-	<p>
-	
-	<label for="datepicker">Ingrese una fecha </label>
-	<input type="text" name="fecha" id="datepicker">
+	<form method="post" action="./svbuscarturnosfecha">
+		<h1>
+			<span style="font-family: Candara">Clinica UTN</span>
+		</h1>
+		<h2>
+			<span style="font-family: Candara">Buscar turnos</span>
+		</h2>
 
-	</p>
-</div>
+		<div>
+			<p>
 
-	<p>
-		<button id=bt1 type=submit>Aceptar</button>
-		<button id=bt2 type=reset>Borrar</button>
-	</p>
-	
-</form>
+				<label for="datepicker">Ingrese una fecha </label> <input
+					type="text" name="fecha" id="datepicker">
 
-<form method="post" action="menuTurnos.html"><p><button id="bt3" type="submit">Volver</button></form>
+			</p>
+		</div>
+
+		<p>
+			<button id=bt1 type=submit>Aceptar</button>
+			<button id=bt2 type=reset>Borrar</button>
+		</p>
+
+	</form>
+
+	<form method="post" action="menuTurnos.html">
+		<p>
+			<button id="bt3" type="submit">Volver</button>
+	</form>
 
 </body>
 </html>

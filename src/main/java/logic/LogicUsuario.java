@@ -4,5 +4,5 @@ import data.DataUsuario;
 
 public class LogicUsuario {
 
-	DataUsuario du = new DataUsuario();	
+	DataUsuario du = new DataUsuario();
 }

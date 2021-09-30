@@ -1,14 +1,14 @@
 @charset "ISO-8859-1";
 
 Body {
-    font-family: 'Candara', sans-serif;
-	background-color: #CFCFCF; 
-    opacity: 1;
-    display: flex;
-    min-height: 100vh;
+	font-family: 'Candara', sans-serif;
+	background-color: #CFCFCF;
+	opacity: 1;
+	display: flex;
+	min-height: 100vh;
 }
 
-h3{
+h3 {
 	color: #000000;
 	font-size: 25px
 }
@@ -39,16 +39,16 @@ button:hover {
 	opacity: 0.5;
 }
 
-form {    
+form {
 	background-color: #959595;
-    margin: auto;
-    width: 90%;
-    max-width: 400px;
-    padding: 4.5em 3em;
-    border-radius: 10px;
-    box-shadow: 0 5px 10px -5px rgb(0 0 0 / 30%);
-    text-align: center;
-    font-style: #FFFFFF;
+	margin: auto;
+	width: 90%;
+	max-width: 400px;
+	padding: 4.5em 3em;
+	border-radius: 10px;
+	box-shadow: 0 5px 10px -5px rgb(0 0 0/ 30%);
+	text-align: center;
+	font-style: #FFFFFF;
 }
 
 input[type=text], input[type=password] {

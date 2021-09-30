@@ -13,44 +13,44 @@
 
 <link rel="stylesheet" type="text/css" href="estilo_lista.css">
 
-<% 
-LinkedList<Tratamiento> tratamientos = (LinkedList)request.getAttribute("tablaTratamientos");
+<%
+LinkedList<Tratamiento> tratamientos = (LinkedList) request.getAttribute("tablaTratamientos");
 
 boolean vacia = tratamientos.isEmpty();
 
-if(vacia==false){
+if (vacia == false) {
 %>
 
 </head>
 <body>
 
 	<table>
-	
-	<td><b> ID </b></td>
-	<td><b> DESCRIPCION </b></td>
-	<td><b> PRECIO </b></td>
 
-	<%
-	for(Tratamiento t : tratamientos){
+		<td><b> ID </b></td>
+		<td><b> DESCRIPCION </b></td>
+		<td><b> PRECIO </b></td>
+
+		<%
+		for (Tratamiento t : tratamientos) {
 		%>
 		<tr>
-			<td><%=t.getIdTratamiento() %></td>
-			<td><%=t.getDescripcion() %></td>
-			<td><%=t.getCosto() %></td>
+			<td><%=t.getIdTratamiento()%></td>
+			<td><%=t.getDescripcion()%></td>
+			<td><%=t.getCosto()%></td>
 		</tr>
-		<% 
-	}
-}
-		else
-		{
+		<%
+		}
+		} else {
 		%>
-		   <h1>No hay tratamientos coincidentes</h1>
-		 
-		<%}
+		<h1>No hay tratamientos coincidentes</h1>
+
+		<%
+		}
 		%>
 	</table>
 
-<p>	<form method="post" action="menuTratamientos.html">
+	<p>
+	<form method="post" action="menuTratamientos.html">
 		<button id="logout" type="submit">Volver al menú</button>
 	</form>
 
