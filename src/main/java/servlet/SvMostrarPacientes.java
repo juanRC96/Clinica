@@ -19,38 +19,33 @@ import logic.LogicPacientes;
 @WebServlet("/svmostrarpacientes")
 public class SvMostrarPacientes extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		HttpSession session=request.getSession(false);  
-        if(session!=null)
-        {
-        	LogicPacientes lp = new LogicPacientes();
-        
-		
-		try 
-		{
-			LinkedList<Paciente> pacientes = lp.mostrarPacientes();
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-			request.setAttribute("tablaPacientes", pacientes);
-			request.getRequestDispatcher("mostrarListaPacientes.jsp").forward(request, response);
-		} 
-		catch (Exception e) 
-		{
-			response.sendRedirect("error.html");
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			LogicPacientes lp = new LogicPacientes();
+
+			try {
+				LinkedList<Paciente> pacientes = lp.mostrarPacientes();
+
+				request.setAttribute("tablaPacientes", pacientes);
+				request.getRequestDispatcher("mostrarListaPacientes.jsp").forward(request, response);
+			} catch (Exception e) {
+				response.sendRedirect("error.html");
+			}
 		}
-        }
-		
-        else
-        {
-        	response.sendRedirect("errorSesion.html");
-        }
+
+		else {
+			response.sendRedirect("errorSesion.html");
+		}
 	}
 
 }

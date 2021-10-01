@@ -53,7 +53,12 @@ public class SvAgregarPaciente extends HttpServlet {
 				try {
 					// VALIDO QUE HAYA DATOS INGRESADOS, LA OBRA SOCIAL PUEDE SER NULL
 					int dni = Integer.parseInt(dniString);
-					int obrasocial = Integer.parseInt(obrasocialString);
+
+					if (obrasocialString != "") {
+						int obrasocial = Integer.parseInt(obrasocialString);
+						os.setId(obrasocial);
+						p.setOs(os);
+					}
 
 					LocalDate fecha_nac = LocalDate.parse(fechaString, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
 
@@ -64,9 +69,6 @@ public class SvAgregarPaciente extends HttpServlet {
 					p.setFecha_nac(fecha_nac);
 					p.setDireccion(direccion);
 					p.setTelefono(telefono);
-
-					os.setId(obrasocial);
-					p.setOs(os);
 
 					lp.agregarPaciente(p);
 					response.sendRedirect("exitoReserva.html");

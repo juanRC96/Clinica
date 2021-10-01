@@ -22,7 +22,7 @@ public class DataPacientes {
 			con = DbConnector.getConexion();
 			PreparedStatement ps = con.prepareStatement(
 					"SELECT dni,pnombre,papellido,fecha_nac,direccion,tel,osnombre FROM paciente pac\r\n"
-							+ "INNER JOIN obra_social os ON pac.obra_social=os.idObraSocial");
+							+ "LEFT JOIN obra_social os ON pac.obra_social=os.idObraSocial");
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
@@ -36,7 +36,14 @@ public class DataPacientes {
 				p.setDireccion(rs.getString(5));
 				p.setTelefono(rs.getString(6));
 
-				o.setNombre(rs.getString(7));
+				if (rs.getString(7) == null) {
+					o.setNombre("-");
+				}
+
+				else {
+					o.setNombre(rs.getString(7));
+				}
+
 				p.setOs(o);
 
 				pacientes.add(p);
@@ -95,33 +102,60 @@ public class DataPacientes {
 		String tel = p.getTelefono();
 
 		ObraSocial os = p.getOs();
-		int obrasocial = os.getId();
 
-		try {
+		if (os != null) {
+			int obrasocial = os.getId();
 
-			con = DbConnector.getConexion();
-			PreparedStatement ps = con
-					.prepareStatement("INSERT INTO paciente(dni,pnombre,papellido,fecha_nac,direccion,tel,obra_social) "
-							+ "VALUES(?,?,?,?,?,?,?)");
+			try {
 
-			ps.setInt(1, dni);
-			ps.setString(2, nombre);
-			ps.setString(3, apellido);
-			ps.setDate(4, java.sql.Date.valueOf(fecha_nac));
-			ps.setString(5, direccion);
-			ps.setString(6, tel);
-			ps.setInt(7, obrasocial);
+				con = DbConnector.getConexion();
+				PreparedStatement ps = con.prepareStatement(
+						"INSERT INTO paciente(dni,pnombre,papellido,fecha_nac,direccion,tel,obra_social) "
+								+ "VALUES(?,?,?,?,?,?,?)");
 
-			ps.executeUpdate();
-			con.close();
+				ps.setInt(1, dni);
+				ps.setString(2, nombre);
+				ps.setString(3, apellido);
+				ps.setDate(4, java.sql.Date.valueOf(fecha_nac));
+				ps.setString(5, direccion);
+				ps.setString(6, tel);
+				ps.setInt(7, obrasocial);
+
+				ps.executeUpdate();
+				con.close();
+
+			}
+
+			catch (Exception e) {
+				System.err.println("Hubo un error en la conexion");
+				throw e;
+			}
 
 		}
+		// asigno paciente sin obra social
+		else {
+			try {
 
-		catch (Exception e) {
-			System.err.println("Hubo un error en la conexion");
-			throw e;
+				con = DbConnector.getConexion();
+				PreparedStatement ps = con.prepareStatement(
+						"INSERT INTO paciente(dni,pnombre,papellido,fecha_nac,direccion,tel) " + "VALUES(?,?,?,?,?,?)");
+
+				ps.setInt(1, dni);
+				ps.setString(2, nombre);
+				ps.setString(3, apellido);
+				ps.setDate(4, java.sql.Date.valueOf(fecha_nac));
+				ps.setString(5, direccion);
+				ps.setString(6, tel);
+
+				ps.executeUpdate();
+				con.close();
+			}
+
+			catch (Exception e) {
+				System.err.println("Hubo un error en la conexion");
+				throw e;
+			}
 		}
-
 	}
 
 	// BORRAR PACIENTE

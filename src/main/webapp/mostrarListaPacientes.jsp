@@ -14,6 +14,8 @@
 <%
 LinkedList<Paciente> pacientes = (LinkedList) request.getAttribute("tablaPacientes");
 
+String obraSoc;
+
 boolean vacia = pacientes.isEmpty();
 
 if (vacia == false) {

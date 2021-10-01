@@ -59,7 +59,7 @@
 		%>
 		<p>
 			Seleccione la obra social <select name="obrasocial">
-				<option selected value="0">Elige una opción</option>
+				<option selected value="">Particular</option>
 				<%
 				for (ObraSocial o : obrassociales) {
 				%>
@@ -84,7 +84,7 @@
 
 	<form method="post" action="menuPacientes.html">
 		<p>
-			<button id="menu" type="bt3">Volver</button>
+			<button id="bt3" type="submit">Volver</button>
 	</form>
 
 </body>
