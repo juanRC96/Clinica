@@ -196,13 +196,12 @@ public class DataPacientes {
 			ps.setInt(1, dni);
 			rs = ps.executeQuery();
 
+			// SI BIEN TRAIGO UN SOLO REGISTRO(PODRIA PONER RS.NEXT();), USO EL WHILE PORQUE
+			// DE NO HABER VALORES COINCIDENTES NO GENERA UNA SQL EXCEPTION
 			while (rs.next()) {
-
 				p.setNombre(rs.getString(2));
 				p.setApellido(rs.getString(3));
-
 			}
-
 		}
 
 		catch (Exception e) {
