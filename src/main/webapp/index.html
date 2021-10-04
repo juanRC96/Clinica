@@ -14,17 +14,25 @@
 	</h1>
 
 	<h2>
-		<b>Sistema de turnos</b>
+		<b>Seleccione una opción</b>
 	</h2>
 
-	<form method="post" action="login.html">
-		<button id="iniciar" type="submit">Iniciar sesión como
-			administrador</button>
-	</form>
+	<div style="text-align: center;">
 
-	<form method="post" action="menuPublico.html">
-		<button id="iniciar" type="submit">Acceso paciente</button>
-	</form>
+		<form method="post" action="login.html">
+			<button id="iniciar" type="submit">Iniciar sesión como
+				administrador</button>
+		</form>
+
+		<form method="post" action="menuReservarTurnoPublico.html">
+			<button id="logout" type="submit">Reservar turno</button>
+		</form>
+
+		<form method="get" action="consultarTurnosPublico.html">
+			<button id="mostrar" type="submit">Consultar turnos por paciente</button>
+		</form>
+
+	</div>
 
 </body>
 </html>

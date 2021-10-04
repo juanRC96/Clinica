@@ -1,3 +1,9 @@
+<%@page import="entities.ObraSocial"%>
+<%@page import="java.util.LinkedList"%>
+<%@page import="logic.LogicObraSocial"%>
+<%@page session="false"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,15 +25,15 @@
 </head>
 <body>
 
+	<h1>
+		<span style="font-family: Candara">Clinica UTN</span>
+	</h1>
+
+	<h2>
+		<span style="font-family: Candara">Agregar paciente</span>
+	</h2>
+
 	<form method="post" action="./svagregarpacientepublico">
-
-		<h1>
-			<span style="font-family: Candara">Clinica UTN</span>
-		</h1>
-
-		<h2>
-			<span style="font-family: Candara">Agregar paciente</span>
-		</h2>
 
 		<p>
 			Ingrese DNI <input type=text name="dni" size=50>
@@ -44,6 +50,23 @@
 				type="text" name="fecha_nac" id="datepicker">
 		</p>
 
+
+		<%
+		//CONSULTO LA LISTA DE DOCTORES
+		LogicObraSocial lo = new LogicObraSocial();
+		LinkedList<ObraSocial> obrassociales = lo.mostrarObrasSociales();
+		%>
+		<p>
+			Seleccione la obra social <select name="obrasocial">
+				<option selected value="">Particular</option>
+				<%
+				for (ObraSocial o : obrassociales) {
+				%>
+				<option value=<%=o.getId()%>><%=o.getNombre()%></option>
+				<%
+				}
+				%>
+			</select>
 		<p>
 			Ingrese direccion <input type=text name="direccion" size=50>
 		</p>
@@ -58,7 +81,7 @@
 
 	</form>
 
-	<form method="post" action="menuReservarTurnoPublico.html">
+	<form method="post" action="menuPacientes.html">
 		<p>
 			<button id="bt3" type="submit">Volver</button>
 	</form>

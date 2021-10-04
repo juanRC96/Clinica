@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entities.ObraSocial;
 import entities.Paciente;
 import logic.LogicPacientes;
 
@@ -31,7 +32,7 @@ public class SvAgregarPacientePublico extends HttpServlet {
 
 		// CREO INSTANCIAS
 		Paciente p = new Paciente();
-		// Odontologo o = new Odontologo();
+		ObraSocial os = new ObraSocial();
 		LogicPacientes lp = new LogicPacientes();
 
 		String dniString = request.getParameter("dni");
@@ -40,12 +41,20 @@ public class SvAgregarPacientePublico extends HttpServlet {
 		String fechaString = request.getParameter("fecha_nac");
 		String direccion = request.getParameter("direccion");
 		String telefono = request.getParameter("telefono");
+		String obrasocialString = request.getParameter("obrasocial");
 
 		if (dniString != "" && nombre != "" && apellido != "" && fechaString != "" && direccion != ""
 				&& telefono != "") {
 
 			try {
 				int dni = Integer.parseInt(dniString);
+
+				if (obrasocialString != "") {
+					int obrasocial = Integer.parseInt(obrasocialString);
+					os.setId(obrasocial);
+					p.setOs(os);
+				}
+
 				LocalDate fecha_nac = LocalDate.parse(fechaString, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
 
 				// LE ASIGNO A LA NUEVA INSTANCIA LOS VALORES DE LAS VARIABLES
@@ -57,6 +66,7 @@ public class SvAgregarPacientePublico extends HttpServlet {
 				p.setTelefono(telefono);
 				lp.agregarPaciente(p);
 				response.sendRedirect("exitoReservaPublico.html");
+
 			} catch (Exception e) {
 				response.sendRedirect("errorReservaPublico.html");
 			}

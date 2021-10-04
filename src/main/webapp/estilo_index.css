@@ -2,12 +2,12 @@
 
 Body {
 	font-family: Candara;
-	background-color: #CFCFCF;
+	background-image: url("https://www.teahub.io/photos/full/36-360758_blue-gradient-wallpaper-hd..jpg");
 }
 
 h1 {
 	text-align: center;
-	color: #000000;
+	color: #FDFEFE;
 	font-size: 80px;
 }
 
@@ -16,26 +16,23 @@ h2 {
 }
 
 form {
-	margin: auto;
-	width: auto;
-	max-width: 400px;
-	padding: 20px;
-	border-radius: 10px;
 	text-align: center;
+	display: inline-block;
 }
 
 Button {
-	background-color: #000000;
-	width: 200px;
+	background-color: #21618C;
+	width: 400px;
 	color: rgb(255, 255, 255);
 	padding: 20px;
-	margin: 10px;
+	margin: 50px;
 	border: none;
 	cursor: pointer;
 	font-family: Candara;
 	font-size: 20px;
 	text-align: center;
 	border-radius: 10px;
+	box-shadow: 5px 5px 3px #17202A;
 }
 
 button:hover {

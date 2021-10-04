@@ -10,5 +10,4 @@ public class Login {
 	public Usuario iniciarSesion(Usuario u) {
 		return du.iniciarSesion(u);
 	}
-
 }
