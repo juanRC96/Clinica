@@ -10,7 +10,7 @@
 <meta charset="ISO-8859-1">
 <title>agregar paciente</title>
 
-<link rel="stylesheet" type="text/css" href="estilo_ingresarDatos.css">
+<link rel="stylesheet" type="text/css" href="estilo_ingresarDatosPublico.css">
 <link rel="stylesheet"
 	href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 

@@ -1,0 +1,65 @@
+@charset "ISO-8859-1";
+
+Body {
+	font-family: Candara;
+	background-image: url("https://www.teahub.io/photos/full/36-360758_blue-gradient-wallpaper-hd..jpg");
+	font-size: 18px;
+}
+
+h1 {
+	text-align: center;
+}
+
+h2 {
+	text-align: center;
+}
+
+#bt1 {
+	background-color: #229954;
+}
+
+#bt2 {
+	background-color: #D35400;
+}
+
+form {
+	margin: auto;
+	width: 90%;
+	max-width: 400px;
+	padding: auto;
+	text-align: center;
+	font-style: #FFFFFF;
+	display: inline;
+}
+
+Button {
+	background-color: #21618C;
+	width: 200px;
+	color: rgb(255, 255, 255);
+	padding: 20px;
+	margin: 10px;
+	border: none;
+	cursor: pointer;
+	font-family: Candara;
+	font-size: 20px;
+	text-align: center;
+	border-radius: 10px;
+	box-shadow: 5px 5px 3px #17202A;
+}
+
+
+button:hover {
+	opacity: 0.5;
+}
+
+input[type=text] {
+	width: 200px;
+	height: 30px;
+	margin: auto;
+	padding: auto;
+	display: inline-block;
+	border: 2px solid(0, 0, 0);
+	box-sizing: border-box;
+	font-family: Candara;
+	font-size: 18px;
+}
