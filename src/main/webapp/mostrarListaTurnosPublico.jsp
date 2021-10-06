@@ -59,7 +59,7 @@ if (vacia == false) {
 	</table>
 
 	<p>
-	<form method="post" action="menuPublico.html">
+	<form method="post" action="index.html">
 		<button id="logout" type="submit">Volver al menú</button>
 	</form>
 

@@ -51,7 +51,7 @@ public class SvConsultarTurnosPublico extends HttpServlet {
 				response.sendRedirect("error.html");
 			}
 		} else {
-			response.sendRedirect("errorDatosIngresados.html");
+			response.sendRedirect("errorDatosIngresadosPublico.html");
 		}
 	}
 }

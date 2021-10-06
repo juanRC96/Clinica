@@ -74,7 +74,7 @@ public class SvAgregarPacientePublico extends HttpServlet {
 		}
 
 		else {
-			response.sendRedirect("errorDatosIngresados.html");
+			response.sendRedirect("errorDatosIngresadosPublico.html");
 		}
 
 	}
