@@ -62,9 +62,17 @@ public class SvRegistroPublico extends HttpServlet {
 
 				t.setFecha(fecha);
 				t.setHora(horario);
+				
+				boolean reservado = lt.reservarTurno(t);
 
-				lt.reservarTurno(t);
-				response.sendRedirect("exitoReservaPublico.html");
+				if (reservado == true) {
+					request.setAttribute("turno", t);
+					request.getRequestDispatcher("mostrarDetalleTurnoReservadoPublico.jsp").forward(request, response);
+				}
+				else {
+					response.sendRedirect("errorTurnoOcupado.html");
+				}
+
 			}
 			catch (Exception e) {
 				response.sendRedirect("errorReservaPublico.html");

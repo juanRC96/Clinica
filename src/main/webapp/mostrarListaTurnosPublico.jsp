@@ -22,6 +22,8 @@ if (vacia == false) {
 </head>
 <body>
 
+<h1>Turnos registrados</h1>
+
 	<table>
 
 		<td><b> APELLIDO DOCTOR </b></td>

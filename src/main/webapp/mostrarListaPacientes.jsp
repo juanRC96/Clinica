@@ -24,6 +24,8 @@ if (vacia == false) {
 </head>
 <body>
 
+<h1>Pacientes</h1>
+
 	<table>
 
 		<td><b> DNI </b></td>

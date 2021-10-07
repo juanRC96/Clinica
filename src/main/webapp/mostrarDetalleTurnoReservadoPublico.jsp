@@ -1,3 +1,4 @@
+<%@page import="logic.LogicTurnos"%>
 <%@page import="entities.Paciente"%>
 <%@page import="entities.Turno"%>
 <%@page import="java.util.LinkedList"%>
@@ -10,19 +11,21 @@
 <meta charset="ISO-8859-1">
 <title>turnos</title>
 
-<link rel="stylesheet" type="text/css" href="estilo_lista.css">
+<link rel="stylesheet" type="text/css" href="estilo_listaPublico.css">
 
 <%
-LinkedList<Turno> turnos = (LinkedList) request.getAttribute("tablaTurnos");
-
-boolean vacia = turnos.isEmpty();
-
-if (vacia == false) {
+Turno t = (Turno) request.getAttribute("turno");
 %>
 </head>
 <body>
 
-<h1>Turnos registrados</h1>
+	<h1>El turno quedó registrado con los siguientes datos</h1>
+
+	<%
+	LogicTurnos lt = new LogicTurnos();
+
+	Turno tur = lt.buscarDatosTurno(t);
+	%>
 
 	<table>
 
@@ -34,34 +37,20 @@ if (vacia == false) {
 		<td><b> APELLIDO PACIENTE </b></td>
 		<td><b> NOMBRE PACIENTE </b></td>
 
-
-		<%
-		for (Turno t : turnos) {
-		%>
 		<tr>
-			<td><%=t.getOdontologo().getApellido()%></td>
-			<td><%=t.getOdontologo().getNombre()%></td>
-			<td><%=t.getFecha()%></td>
-			<td><%=t.getHora()%></td>
-			<td><%=t.getPaciente().getDni()%></td>
-			<td><%=t.getPaciente().getApellido()%></td>
-			<td><%=t.getPaciente().getNombre()%></td>
+			<td><%=tur.getOdontologo().getApellido()%></td>
+			<td><%=tur.getOdontologo().getNombre()%></td>
+			<td><%=tur.getFecha()%></td>
+			<td><%=tur.getHora()%></td>
+			<td><%=tur.getPaciente().getDni()%></td>
+			<td><%=tur.getPaciente().getApellido()%></td>
+			<td><%=tur.getPaciente().getNombre()%></td>
 		</tr>
-		<%
-		}
-		} else {
-		%>
-
-		<h1>No hay turnos coincidentes</h1>
-
-		<%
-		}
-		%>
 
 	</table>
 
 	<p>
-	<form method="post" action="menuGeneral.html">
+	<form method="post" action="index.html">
 		<button id="logout" type="submit">Volver al menú</button>
 	</form>
 

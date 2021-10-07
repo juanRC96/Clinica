@@ -24,6 +24,8 @@ if (vacia == false) {
 </head>
 <body>
 
+<h1>Atenciones registradas</h1>
+
 	<table>
 
 		<td><b> ID ATENCIÓN </b></td>

@@ -24,6 +24,8 @@ if (vacia == false) {
 </head>
 <body>
 
+<h1>Tratamientos</h1>
+
 	<table>
 
 		<td><b> ID </b></td>

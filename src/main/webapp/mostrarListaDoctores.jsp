@@ -23,6 +23,8 @@ if (vacia == false) {
 </head>
 <body>
 
+<h1>Odontólogos</h1>
+
 	<table>
 
 		<td><b> MATRÍCULA </b></td>
