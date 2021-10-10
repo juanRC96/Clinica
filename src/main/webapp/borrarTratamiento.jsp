@@ -30,7 +30,7 @@
 			LinkedList<Tratamiento> tratamientos = lt.MostrarTratamientos();
 			%>
 			Seleccione un tipo de tratamiento <select name="tratamiento">
-				<option selected value="0">Elige una opción</option>
+				<option selected value="">Elige una opción</option>
 				<%
 				for (Tratamiento t : tratamientos) {
 				%>

@@ -30,7 +30,7 @@
 			LinkedList<Odontologo> odontologos = lo.mostrarOdontologos();
 			%>
 			Seleccione el doctor a borrar <select name="matricula">
-				<option selected value="0">Elige una opción</option>
+				<option selected value="">Elige una opción</option>
 				<%
 				for (Odontologo o : odontologos) {
 				%>

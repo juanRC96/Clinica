@@ -167,7 +167,7 @@ public class DataPacientes {
 			con = DbConnector.getConexion();
 			PreparedStatement ps = con.prepareStatement("DELETE FROM paciente WHERE dni=?");
 			ps.setInt(1, dni);
-			
+
 			ps.executeUpdate();
 			con.close();
 		}
@@ -189,20 +189,29 @@ public class DataPacientes {
 
 		try {
 			con = DbConnector.getConexion();
-			PreparedStatement ps = con
-					.prepareStatement("SELECT dni,pnombre,papellido,fecha_nac,direccion,tel FROM paciente WHERE dni=?");
+			PreparedStatement ps = con.prepareStatement(
+					"SELECT dni,pnombre,papellido,fecha_nac,direccion,tel,osnombre FROM paciente pac LEFT JOIN obra_social os ON pac.obra_social=os.idObraSocial WHERE dni=?");
 			ps.setInt(1, dni);
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
 
 				Paciente p = new Paciente();
+				ObraSocial o = new ObraSocial();
+
 				p.setDni(rs.getInt(1));
 				p.setNombre(rs.getString(2));
 				p.setApellido(rs.getString(3));
 				p.setFecha_nac(rs.getDate(4).toLocalDate());
 				p.setDireccion(rs.getString(5));
 				p.setTelefono(rs.getString(6));
+
+				if (rs.getString(7) == null) {
+					o.setNombre("-");
+				} else {
+					o.setNombre(rs.getString(7));
+				}
+				p.setOs(o);
 
 				pacientes.add(p);
 			}

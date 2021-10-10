@@ -30,7 +30,7 @@
 			LinkedList<ObraSocial> obrassociales = lo.mostrarObrasSociales();
 			%>
 			Seleccione la obra social a borrar <select name="idobrasocial">
-				<option selected value="0">Elige una opción</option>
+				<option selected value="">Elige una opción</option>
 				<%
 				for (ObraSocial o : obrassociales) {
 				%>

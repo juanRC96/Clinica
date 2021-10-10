@@ -32,39 +32,38 @@ Turno t = (Turno) request.getAttribute("turno");
 	
 	switch(mesValor)
 	{
-	case 1: mesEspanol="Enero";
+	case 1: mesEspanol="enero";
 	break;
-	case 2: mesEspanol="Febrero";
+	case 2: mesEspanol="febrero";
 	break;
-	case 3: mesEspanol="Marzo";
+	case 3: mesEspanol="marzo";
 	break;
-	case 4: mesEspanol="Abril";
+	case 4: mesEspanol="abril";
 	break;
-	case 5: mesEspanol="Mayo";
+	case 5: mesEspanol="mayo";
 	break;
-	case 6: mesEspanol="Junio";
+	case 6: mesEspanol="junio";
 	break;
-	case 7: mesEspanol="Julio";
+	case 7: mesEspanol="julio";
 	break;
-	case 8: mesEspanol="Agosto";
+	case 8: mesEspanol="agosto";
 	break;
-	case 9: mesEspanol="Septiembre";
+	case 9: mesEspanol="septiembre";
 	break;
-	case 10: mesEspanol="Octubre";
+	case 10: mesEspanol="octubre";
 	break;
-	case 11: mesEspanol="Noviembre";
+	case 11: mesEspanol="noviembre";
 	break;
-	case 12: mesEspanol="Diciembre";
+	case 12: mesEspanol="diciembre";
 	break;
 	}
 	
 	%>
 
 	<p style="text-align: center ; color:white ; font-size: 25px">
-		El paciente <b><%=tur.getPaciente().getApellido()%>, <%=tur.getPaciente().getNombre()%></b>
-		con número de documento <b><%=tur.getPaciente().getDni()%></b> será
-		atendido por el doctor <b><%=tur.getOdontologo().getApellido()%>,
-			<%=tur.getOdontologo().getNombre()%></b> el día <b><%=tur.getFecha().getDayOfMonth()%> de <%=mesEspanol%> del <%=tur.getFecha().getYear()%></b>
+		El paciente <b><%=tur.getPaciente().getNombre()%> <%=tur.getPaciente().getApellido()%></b>
+		con número de DNI <b><%=tur.getPaciente().getDni()%></b>, será
+		atendido por el doctor <b><%=tur.getOdontologo().getNombre()%> <%=tur.getOdontologo().getApellido()%></b> el día <b><%=tur.getFecha().getDayOfMonth()%> de <%=mesEspanol%> del <%=tur.getFecha().getYear()%></b>
 		a las <b><%=tur.getHora()%></b> hs.
 	</p>
 
