@@ -1,5 +1,6 @@
 package logic;
 
+import java.time.LocalDate;
 import java.util.LinkedList;
 
 import data.DataTurnos;
@@ -20,12 +21,23 @@ public class LogicTurnos {
 		return disponible;
 	}
 
+	// VERIFICAR SI LA FECHA ES VALIDA(fecha de hoy menor a la ingresada)
+	public boolean fechaValida(Turno t) {
+		boolean fechaok = false;
+		LocalDate today = LocalDate.now();
+		if (today.isBefore(t.getFecha())) {
+			fechaok = true;
+		}
+		return fechaok;
+	}
+
 	// RESERVO EL TURNO
 	public boolean reservarTurno(Turno t) throws Exception {
 		boolean reservado = false;
+		boolean fechaValida = this.fechaValida(t);
 		boolean disponible = this.estaDisponible(t);
 
-		if (disponible == true) {
+		if (fechaValida == true && disponible == true) {
 			dt.registrarTurno(t);
 			reservado = true;
 		} else {

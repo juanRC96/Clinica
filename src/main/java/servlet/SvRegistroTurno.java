@@ -71,11 +71,10 @@ public class SvRegistroTurno extends HttpServlet {
 				if (reservado == true) {
 					request.setAttribute("turno", t);
 					request.getRequestDispatcher("mostrarDetalleTurnoReservado.jsp").forward(request, response);
+				} else {
+					response.sendRedirect("errorRegistroTurno.html");
 				}
-				else {
-					response.sendRedirect("errorTurnoOcupado.html");
-				}
-				
+
 			} catch (Exception e) {
 				response.sendRedirect("errorReserva.html");
 			}
