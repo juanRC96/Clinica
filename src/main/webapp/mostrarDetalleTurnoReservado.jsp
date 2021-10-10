@@ -19,14 +19,13 @@ Turno t = (Turno) request.getAttribute("turno");
 </head>
 <body>
 
-	<h1>El turno quedó registrado con los siguientes datos</h1>
+	<h1>Turno registrado con los siguientes datos</h1>
 
 	<%
 	LogicTurnos lt = new LogicTurnos();
 
 	Turno tur = lt.buscarDatosTurno(t);
-	%>
-
+	%>	
 	<table>
 
 		<td><b> APELLIDO DOCTOR </b></td>

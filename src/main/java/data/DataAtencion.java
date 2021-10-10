@@ -115,7 +115,7 @@ public class DataAtencion {
 			con = DbConnector.getConexion();
 			PreparedStatement ps = con.prepareStatement("DELETE FROM atencion WHERE idAtencion=?");
 			ps.setInt(1, id);
-			ps.execute();
+			ps.executeUpdate();
 			con.close();
 		}
 

@@ -69,7 +69,8 @@ public class DataTratamiento {
 			con = DbConnector.getConexion();
 			PreparedStatement ps = con.prepareStatement("DELETE FROM tratamiento WHERE idTratamiento=?");
 			ps.setInt(1, id);
-			ps.execute();
+			
+			ps.executeUpdate();
 			con.close();
 		}
 

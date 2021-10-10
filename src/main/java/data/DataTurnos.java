@@ -144,7 +144,8 @@ public class DataTurnos {
 			PreparedStatement ps = con.prepareStatement("DELETE FROM turno WHERE dniPaciente=? and fecha=?");
 			ps.setInt(1, dni);
 			ps.setDate(2, java.sql.Date.valueOf(fecha));
-			ps.execute();
+			
+			ps.executeUpdate();
 			con.close();
 		}
 

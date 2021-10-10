@@ -72,7 +72,7 @@ public class DataObraSocial {
 			con = DbConnector.getConexion();
 			PreparedStatement ps = con.prepareStatement("DELETE FROM obra_social WHERE idObraSocial=?");
 			ps.setInt(1, id);
-			ps.execute();
+			ps.executeUpdate();
 			con.close();
 		}
 

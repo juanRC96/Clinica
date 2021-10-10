@@ -79,7 +79,8 @@ public class DataOdontologos {
 			con = DbConnector.getConexion();
 			PreparedStatement ps = con.prepareStatement("DELETE FROM odontologo WHERE matricula=?");
 			ps.setInt(1, matricula);
-			ps.execute();
+			
+			ps.executeUpdate();
 			con.close();
 		}
 

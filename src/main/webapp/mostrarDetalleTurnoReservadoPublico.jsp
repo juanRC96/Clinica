@@ -19,35 +19,54 @@ Turno t = (Turno) request.getAttribute("turno");
 </head>
 <body>
 
-	<h1>El turno quedó registrado con los siguientes datos</h1>
+	<h1>Turno registrado</h1>
 
 	<%
 	LogicTurnos lt = new LogicTurnos();
 
 	Turno tur = lt.buscarDatosTurno(t);
+	
+	//esto lo podria hacer con DateTimeFormatter pero no se como (consultar)
+	int mesValor = t.getFecha().getMonthValue();
+	String mesEspanol=null;
+	
+	switch(mesValor)
+	{
+	case 1: mesEspanol="Enero";
+	break;
+	case 2: mesEspanol="Febrero";
+	break;
+	case 3: mesEspanol="Marzo";
+	break;
+	case 4: mesEspanol="Abril";
+	break;
+	case 5: mesEspanol="Mayo";
+	break;
+	case 6: mesEspanol="Junio";
+	break;
+	case 7: mesEspanol="Julio";
+	break;
+	case 8: mesEspanol="Agosto";
+	break;
+	case 9: mesEspanol="Septiembre";
+	break;
+	case 10: mesEspanol="Octubre";
+	break;
+	case 11: mesEspanol="Noviembre";
+	break;
+	case 12: mesEspanol="Diciembre";
+	break;
+	}
+	
 	%>
 
-	<table>
-
-		<td><b> APELLIDO DOCTOR </b></td>
-		<td><b> NOMBRE DOCTOR </b></td>
-		<td><b> FECHA TURNO</b></td>
-		<td><b> HORA TURNO</b></td>
-		<td><b> DNI PACIENTE </b></td>
-		<td><b> APELLIDO PACIENTE </b></td>
-		<td><b> NOMBRE PACIENTE </b></td>
-
-		<tr>
-			<td><%=tur.getOdontologo().getApellido()%></td>
-			<td><%=tur.getOdontologo().getNombre()%></td>
-			<td><%=tur.getFecha()%></td>
-			<td><%=tur.getHora()%></td>
-			<td><%=tur.getPaciente().getDni()%></td>
-			<td><%=tur.getPaciente().getApellido()%></td>
-			<td><%=tur.getPaciente().getNombre()%></td>
-		</tr>
-
-	</table>
+	<p style="text-align: center ; color:white ; font-size: 25px">
+		El paciente <b><%=tur.getPaciente().getApellido()%>, <%=tur.getPaciente().getNombre()%></b>
+		con número de documento <b><%=tur.getPaciente().getDni()%></b> será
+		atendido por el doctor <b><%=tur.getOdontologo().getApellido()%>,
+			<%=tur.getOdontologo().getNombre()%></b> el día <b><%=tur.getFecha().getDayOfMonth()%> de <%=mesEspanol%> del <%=tur.getFecha().getYear()%></b>
+		a las <b><%=tur.getHora()%></b> hs.
+	</p>
 
 	<p>
 	<form method="post" action="index.html">

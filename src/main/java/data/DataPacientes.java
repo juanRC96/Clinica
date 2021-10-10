@@ -167,7 +167,8 @@ public class DataPacientes {
 			con = DbConnector.getConexion();
 			PreparedStatement ps = con.prepareStatement("DELETE FROM paciente WHERE dni=?");
 			ps.setInt(1, dni);
-			ps.execute();
+			
+			ps.executeUpdate();
 			con.close();
 		}
 
