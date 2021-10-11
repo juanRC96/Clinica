@@ -7,15 +7,14 @@ Body {
 }
 
 table, th, td {
-	border: 3px solid #000000;
+	border: 2px solid #21618C;
 	padding: 4px;
 	text-align: center;
 	margin-left: auto;
 	margin-right: auto;
 	color: #000000;
 	border-collapse: collapse;
-	background-color: #85C1E9;
-	border-radius: 20px;
+	background-color: #81C1FF;
 }
 
 table {
