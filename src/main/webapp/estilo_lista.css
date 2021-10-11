@@ -7,7 +7,7 @@ Body {
 }
 
 table, th, td {
-	border: 3px solid #FFFFFF;
+	border: 2px solid transparent;
 	padding: 4px;
 	text-align: center;
 	margin-left: auto;
