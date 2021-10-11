@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import entities.Odontologo;
 import entities.Paciente;
@@ -36,52 +37,77 @@ public class SvRegistroTurno extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// CREO INSTANCIAS
-		Turno t = new Turno();
-		Paciente p = new Paciente();
-		Odontologo o = new Odontologo();
-		LogicTurnos lt = new LogicTurnos();
+		String nivelAcceso = request.getParameter("acceso");
+		HttpSession session = request.getSession(false);
 
-		String dniString = request.getParameter("dni");
-		String matriculaString = request.getParameter("matricula");
-		String fechaString = request.getParameter("fecha");
-		String horaString = request.getParameter("horario");
+		if ((session != null) || (nivelAcceso.equals("publico"))) {
 
-		if (dniString != "" && matriculaString != "" && fechaString != "" && horaString != "") {
+			// CREO INSTANCIAS
+			Turno t = new Turno();
+			Paciente p = new Paciente();
+			Odontologo o = new Odontologo();
+			LogicTurnos lt = new LogicTurnos();
 
-			try {
-				int dni = Integer.parseInt(dniString);
-				int matricula = Integer.parseInt(matriculaString);
+			String dniString = request.getParameter("dni");
+			String matriculaString = request.getParameter("matricula");
+			String fechaString = request.getParameter("fecha");
+			String horaString = request.getParameter("horario");
 
-				LocalDate fecha = LocalDate.parse(fechaString, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-				LocalTime horario = LocalTime.parse(horaString, DateTimeFormatter.ofPattern("HH:mm:ss"));
+			if (dniString != "" && matriculaString != "" && fechaString != "" && horaString != "") {
 
-				// LE ASIGNO A LA NUEVA INSTANCIA LOS VALORES DE LAS VARIABLES
-				p.setDni(dni);
-				t.setPaciente(p);
+				try {
+					int dni = Integer.parseInt(dniString);
+					int matricula = Integer.parseInt(matriculaString);
 
-				o.setMatricula(matricula);
-				t.setOdontologo(o);
+					LocalDate fecha = LocalDate.parse(fechaString, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+					LocalTime horario = LocalTime.parse(horaString, DateTimeFormatter.ofPattern("HH:mm:ss"));
 
-				t.setFecha(fecha);
-				t.setHora(horario);
+					// LE ASIGNO A LA NUEVA INSTANCIA LOS VALORES DE LAS VARIABLES
+					p.setDni(dni);
+					t.setPaciente(p);
 
-				boolean reservado = lt.reservarTurno(t);
+					o.setMatricula(matricula);
+					t.setOdontologo(o);
 
-				if (reservado == true) {
-					request.setAttribute("turno", t);
-					request.getRequestDispatcher("mostrarDetalleTurnoReservado.jsp").forward(request, response);
-				} else {
-					response.sendRedirect("errorRegistroTurno.html");
+					t.setFecha(fecha);
+					t.setHora(horario);
+
+					boolean reservado = lt.reservarTurno(t);
+
+					if (reservado == true) {
+						request.setAttribute("turno", t);
+
+						if (nivelAcceso.equals("publico")) {
+							request.getRequestDispatcher("mostrarDetalleTurnoReservadoPublico.jsp").forward(request,
+									response);
+						} else {
+							request.getRequestDispatcher("mostrarDetalleTurnoReservado.jsp").forward(request, response);
+						}
+
+					} else {
+						if (nivelAcceso.equals("publico")) {
+							response.sendRedirect("errorRegistroTurnoPublico.html");
+						} else {
+							response.sendRedirect("errorRegistroTurno.html");
+						}
+					}
+
+				} catch (Exception e) {
+					if (nivelAcceso.equals("publico")) {
+						response.sendRedirect("errorReservaPublico.html");
+					} else {
+						response.sendRedirect("errorReserva.html");
+					}
 				}
-
-			} catch (Exception e) {
-				response.sendRedirect("errorReserva.html");
+			} else {
+				if (nivelAcceso.equals("publico")) {
+					response.sendRedirect("errorDatosIngresadosPublico.html");
+				} else {
+					response.sendRedirect("errorDatosIngresados.html");
+				}
 			}
-		}
-
-		else {
-			response.sendRedirect("errorDatosIngresados.html");
+		} else {
+			response.sendRedirect("errorSesion.html");
 		}
 	}
 }

@@ -30,9 +30,10 @@ public class SvConsultarTurnos extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		String nivelAcceso = request.getParameter("acceso");
 		HttpSession session = request.getSession(false);
 
-		if (session != null) {
+		if ((session != null) || (nivelAcceso.equals("publico"))) {
 			Turno t = new Turno();
 			Paciente p = new Paciente();
 			LogicTurnos lt = new LogicTurnos();
@@ -49,21 +50,32 @@ public class SvConsultarTurnos extends HttpServlet {
 
 					LinkedList<Turno> turnos = lt.buscarTurnoporDni(t);
 					request.setAttribute("tablaTurnos", turnos);
-					request.getRequestDispatcher("mostrarListaTurnos.jsp").forward(request, response);
+
+					if (nivelAcceso.equals("publico")) {
+						request.getRequestDispatcher("mostrarListaTurnosPublico.jsp").forward(request, response);
+					} else {
+						request.getRequestDispatcher("mostrarListaTurnos.jsp").forward(request, response);
+					}
 
 				} catch (Exception e) {
-					response.sendRedirect("error.html");
+					if (nivelAcceso.equals("publico")) {
+						response.sendRedirect("errorPublico.html");
+					} else {
+						response.sendRedirect("error.html");
+					}
 				}
 			}
-			
-			else {
-				response.sendRedirect("errorDatosIngresados.html");
-			}
 
+			else {
+				if (nivelAcceso.equals("publico")) {
+					response.sendRedirect("errorDatosIngresadosPublico.html");
+				} else {
+					response.sendRedirect("errorDatosIngresados.html");
+				}
+			}
 		} else {
 			response.sendRedirect("errorSesion.html");
 		}
-
 	}
 
 }

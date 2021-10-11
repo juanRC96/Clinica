@@ -9,13 +9,15 @@
 </head>
 <body>
 
-	<form method="post" action="./svconsultarturnospublico">
+	<form method="post" action="./svconsultarturno">
 		<h1>
 			<span style="font-family: Candara">Clinica UTN</span>
 		</h1>
 		<h2>
 			<span style="font-family: Candara">Buscar turno por paciente</span>
 		</h2>
+		
+		<input type=hidden name="acceso" value="publico" size=50>
 
 		<p>
 			Ingrese DNI del paciente <input type=text name="dni" size=50>

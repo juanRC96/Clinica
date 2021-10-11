@@ -17,11 +17,10 @@
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script> 
-
-$(function (){
-	$("#datepicker").datepicker();
-});
+<script>
+	$(function() {
+		$("#datepicker").datepicker();
+	});
 </script>
 
 </head>
@@ -38,7 +37,8 @@ $(function (){
 	<form method="post" action="./svbuscarpacientesolo"
 		action="reservarTurnos.jsp">
 
-		<input type=hidden name="rol" value="reservarturnos">
+		<input type=hidden name="acceso" value="privado" size=50> <input
+			type=hidden name="rol" value="reservarturnos">
 		<p>
 			Ingrese el DNI <input type=text name="dni" size=50>
 		</p>
@@ -47,17 +47,17 @@ $(function (){
 		</p>
 
 		<%
-	Paciente p = (Paciente)request.getAttribute("datosPaciente");
-		
+		Paciente p = (Paciente) request.getAttribute("datosPaciente");
+
 		//VALIDO QUE HAYA ALGUN PACIENTE CON EL DNI INGRESADO, EN EL CASO DE QUE NO, NOTIFICO 
-		if (p!=null){
-	%>
+		if (p != null) {
+		%>
 
 		<%
 		String nombre = p.getNombre();
-			String apellido = p.getApellido();
-			
-			if(nombre!=null && apellido!=null){
+		String apellido = p.getApellido();
+
+		if (nombre != null && apellido != null) {
 		%>
 
 		<p>
@@ -67,52 +67,51 @@ $(function (){
 
 		<%
 		}
-			
-			else{
+
+		else {
 		%>
 		<p style="color: #FF0000">Paciente no registrado</p>
 		<%
 		}
-				}
+		}
 		%>
 
 	</form>
 
 	<form method="post" action="./svregistro">
 
+		<input type=hidden name="acceso" value="privado" size=50>
+
 		<%
-//ACA VALIDO QUE SE HAYA INGRESADO UN VALOR EN EL CAMPO DNI
-if(request.getParameter("dni")!=null)
-{
-%>
+		//ACA VALIDO QUE SE HAYA INGRESADO UN VALOR EN EL CAMPO DNI
+		if (request.getParameter("dni") != null) {
+		%>
 		<input name="dni" type="hidden"
 			value="<%=request.getParameter("dni")%>">
 		<%
-}
-else
-{
-%>
+		} else {
+		%>
 		<input name="dni" type="hidden" value=0>
 		<%
-}
-%>
+		}
+		%>
 
 		<%
-//CONSULTO LA LISTA DE DOCTORES
-LogicOdontologos lo = new LogicOdontologos();
-LinkedList<Odontologo> doctores = lo.mostrarOdontologos();
-%>
+		//CONSULTO LA LISTA DE DOCTORES
+		LogicOdontologos lo = new LogicOdontologos();
+		LinkedList<Odontologo> doctores = lo.mostrarOdontologos();
+		%>
 		<p>
 			Seleccione un profesional <select name="matricula">
 				<option selected value="0">Elige una opción</option>
 				<%
-for(Odontologo o : doctores)
-{%>
-				<option value=<%=o.getMatricula() %>><%=o.getApellido()%>,
+				for (Odontologo o : doctores) {
+				%>
+				<option value=<%=o.getMatricula()%>><%=o.getApellido()%>,
 					<%=o.getNombre()%></option>
 				<%
-}
-%>
+				}
+				%>
 			</select>
 		<div>
 			<p>

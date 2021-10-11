@@ -11,7 +11,8 @@
 <meta charset="ISO-8859-1">
 <title>reservarturnos</title>
 
-<link rel="stylesheet" type="text/css" href="estilo_ingresarDatosPublico.css">
+<link rel="stylesheet" type="text/css"
+	href="estilo_ingresarDatosPublico.css">
 <link rel="stylesheet"
 	href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
@@ -34,8 +35,10 @@
 	</h2>
 
 
-	<form method="post" action="./svbuscarpacientesolopublico"
+	<form method="post" action="./svbuscarpacientesolo"
 		action="reservarTurnos.jsp">
+
+		<input type=hidden name="acceso" value="publico" size=50>
 
 		<p>
 			Ingrese el DNI: <input type=text name="dni" size=50>
@@ -75,7 +78,9 @@
 
 	</form>
 
-	<form method="post" action="./svregistropublico">
+	<form method="post" action="./svregistro">
+
+		<input type=hidden name="acceso" value="publico" size=50>
 
 		<%
 		//ACA VALIDO QUE SE HAYA INGRESADO UN VALOR EN EL CAMPO DNI

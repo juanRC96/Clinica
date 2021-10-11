@@ -35,6 +35,7 @@
 
 	<form method="post" action="./svagregarpaciente">
 
+		<input type=hidden name="acceso" value="privado" size=50>
 
 		<p>
 			Ingrese DNI <input type=text name="dni" size=50>

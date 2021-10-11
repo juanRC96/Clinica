@@ -39,7 +39,8 @@
 
 	<form method="post" action="./svbuscarpacientesolo"
 		action="agregarAtencion.jsp">
-
+		
+		<input type=hidden name="acceso" value="privado" size=50>
 		<input type=hidden name="rol" value="agregaratencion">
 		<p>
 			Ingrese el DNI: <input type=text name="dni" size=50>

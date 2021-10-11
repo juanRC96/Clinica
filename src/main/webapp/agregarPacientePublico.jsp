@@ -10,7 +10,8 @@
 <meta charset="ISO-8859-1">
 <title>agregar paciente</title>
 
-<link rel="stylesheet" type="text/css" href="estilo_ingresarDatosPublico.css">
+<link rel="stylesheet" type="text/css"
+	href="estilo_ingresarDatosPublico.css">
 <link rel="stylesheet"
 	href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
@@ -33,7 +34,9 @@
 		<span style="font-family: Candara">Agregar paciente</span>
 	</h2>
 
-	<form method="post" action="./svagregarpacientepublico">
+	<form method="post" action="./svagregarpaciente">
+
+		<input type=hidden name="acceso" value="publico" size=50>
 
 		<p>
 			Ingrese DNI <input type=text name="dni" size=50>

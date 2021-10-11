@@ -31,9 +31,10 @@ public class SvAgregarPaciente extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		String nivelAcceso = request.getParameter("acceso");
 		HttpSession session = request.getSession(false);
 
-		if (session != null) {
+		if ((session != null) || (nivelAcceso.equals("publico"))) {
 			// CREO INSTANCIAS
 			Paciente p = new Paciente();
 			ObraSocial os = new ObraSocial();
@@ -71,16 +72,30 @@ public class SvAgregarPaciente extends HttpServlet {
 					p.setTelefono(telefono);
 
 					lp.agregarPaciente(p);
-					response.sendRedirect("exitoReserva.html");
+
+					if (nivelAcceso.equals("publico")) {
+						response.sendRedirect("exitoReservaPublico.html");
+					} else {
+						response.sendRedirect("exitoReserva.html");
+					}
 				}
 
 				catch (Exception e) {
-					response.sendRedirect("errorReserva.html");
+					if (nivelAcceso.equals("publico")) {
+						response.sendRedirect("errorReservaPublico.html");
+					} else {
+						response.sendRedirect("errorReserva.html");
+					}
 				}
 
 			} else {
-				response.sendRedirect("errorDatosIngresados.html");
+				if (nivelAcceso.equals("publico")) {
+					response.sendRedirect("errorDatosIngresadosPublico.html");
+				} else {
+					response.sendRedirect("errorDatosIngresados.html");
+				}
 			}
+
 		} else {
 			response.sendRedirect("errorSesion.html");
 		}

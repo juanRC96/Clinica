@@ -77,19 +77,16 @@ public class DataTurnos {
 		try {
 
 			con = DbConnector.getConexion();
-			PreparedStatement ps = con.prepareStatement("SELECT matricula,fecha,hora FROM turno");
-			rs = ps.executeQuery();
-			// RECUPERAR TURNOS, ASIGNO A LINKEDLIST 6B
+			PreparedStatement ps = con.prepareStatement(
+					"SELECT matricula,fecha,hora FROM turno WHERE matricula=? and fecha=? and hora=?");
+			ps.setInt(1, matricula);
+			ps.setDate(2, java.sql.Date.valueOf(fecha));
+			ps.setTime(3, java.sql.Time.valueOf(hora));
 
-			while (rs.next()) {
-				if (matricula == (rs.getInt(1)) && fecha.equals(rs.getDate(2).toLocalDate())
-						&& hora.equals(rs.getTime(3).toLocalTime())) // FALTA COMPROBAR SI LA HORA ESTA DENTRO DE LAS DE
-																		// TRABAJO
-				{
-					disponible = false;
-				} else {
-					disponible = true;
-				}
+			rs = ps.executeQuery();
+
+			if (rs.next() == false) {
+				disponible = true;
 			}
 		}
 

@@ -28,9 +28,10 @@ public class SvBuscarPacienteSolo extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		String nivelAcceso = request.getParameter("acceso");
 		HttpSession session = request.getSession(false);
 
-		if (session != null) {
+		if ((session != null) || (nivelAcceso.equals("publico"))) {
 			Paciente p = new Paciente();
 			LogicPacientes lp = new LogicPacientes();
 
@@ -45,21 +46,35 @@ public class SvBuscarPacienteSolo extends HttpServlet {
 
 					Paciente pac = lp.buscarPacienteSolo(p);
 
-					switch (rol) {
-					case "reservarturnos":
+					if (nivelAcceso.equals("publico")) {
 						request.setAttribute("datosPaciente", pac);
-						request.getRequestDispatcher("reservarTurnos.jsp").forward(request, response);
+						request.getRequestDispatcher("reservarTurnosPublico.jsp").forward(request, response);
+					} else {
 
-					case "agregaratencion":
-						request.setAttribute("datosPaciente", pac);
-						request.getRequestDispatcher("agregarAtencion.jsp").forward(request, response);
+						switch (rol) {
+						case "reservarturnos":
+							request.setAttribute("datosPaciente", pac);
+							request.getRequestDispatcher("reservarTurnos.jsp").forward(request, response);
+
+						case "agregaratencion":
+							request.setAttribute("datosPaciente", pac);
+							request.getRequestDispatcher("agregarAtencion.jsp").forward(request, response);
+						}
 					}
 
 				} catch (Exception e) {
-					response.sendRedirect("error.html");
+					if (nivelAcceso.equals("publico")) {
+						response.sendRedirect("errorPublico.html");
+					} else {
+						response.sendRedirect("error.html");
+					}
 				}
 			} else {
-				response.sendRedirect("errorDatosIngresados.html");
+				if (nivelAcceso.equals("publico")) {
+					response.sendRedirect("errorDatosIngresadosPublico.html");
+				} else {
+					response.sendRedirect("errorDatosIngresados.html");
+				}
 			}
 		} else {
 			response.sendRedirect("errorSesion.html");
