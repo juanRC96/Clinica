@@ -16,20 +16,11 @@ public class LogicAtenciones {
 
 	// AGREGAR ATENCIONES
 	public void agregarAtencion(Atencion a) throws Exception {
-		try {
-			da.agregarAtencion(a);
-		} catch (Exception e) {
-			throw e;
-		}
+		da.agregarAtencion(a);
 	}
 
 	// BORRAR ATENCION
 	public void borrarAtencion(Atencion a) throws Exception {
-		try {
-			da.borrarAtencion(a);
-		} catch (Exception e) {
-			throw e;
-		}
+		da.borrarAtencion(a);
 	}
-
 }

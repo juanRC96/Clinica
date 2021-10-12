@@ -52,7 +52,7 @@ if (vacia == false) {
 		} else {
 		%>
 
-		<h2>No hay turnos coincidentes</h2>
+		<h1>No hay turnos coincidentes</h1>
 
 		<%
 		}
