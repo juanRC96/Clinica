@@ -3,7 +3,8 @@
 Body {
 	font-family: Candara;
 	font-size: 20px;
-	background-image: url("https://www.teahub.io/photos/full/36-360758_blue-gradient-wallpaper-hd..jpg");
+	background-image:
+		url("https://www.teahub.io/photos/full/36-360758_blue-gradient-wallpaper-hd..jpg");
 }
 
 table, th, td {
@@ -49,4 +50,9 @@ h1 {
 	text-align: center;
 	color: #000000;
 	font-size: 40px;
+}
+
+h2 {
+	text-align: center;
+	color: #FFFFFF;
 }
