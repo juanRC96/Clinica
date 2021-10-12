@@ -24,8 +24,8 @@ public class LogicTurnos {
 	// VERIFICAR SI LA FECHA ES VALIDA(fecha de hoy menor a la ingresada)
 	public boolean fechaValida(Turno t) {
 		boolean fechaok = false;
-		LocalDate today = LocalDate.now();
-		if (today.isBefore(t.getFecha())) {
+		LocalDate hoy = LocalDate.now();
+		if (hoy.isBefore(t.getFecha())) {
 			fechaok = true;
 		}
 		return fechaok;
