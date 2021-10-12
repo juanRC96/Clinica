@@ -36,14 +36,7 @@ public class DataPacientes {
 				p.setDireccion(rs.getString(5));
 				p.setTelefono(rs.getString(6));
 
-				if (rs.getString(7) == null) {
-					o.setNombre("-");
-				}
-
-				else {
-					o.setNombre(rs.getString(7));
-				}
-
+				o.setNombre(rs.getString(7));
 				p.setOs(o);
 
 				pacientes.add(p);

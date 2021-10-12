@@ -39,15 +39,7 @@ public class DataAtencion {
 				a.setIdAtencion(rs.getInt(1));
 				a.setFecha(rs.getDate(2).toLocalDate());
 				t.setDescripcion(rs.getString(3));
-
-				if (rs.getString(4) == null) {
-					a.setObservaciones("-");
-				}
-
-				else {
-					a.setObservaciones(rs.getString(4));
-				}
-
+				a.setObservaciones(rs.getString(4));
 				t.setCosto(rs.getInt(5));
 				o.setApellido(rs.getString(6));
 				o.setNombre(rs.getString(7));

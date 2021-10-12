@@ -24,13 +24,13 @@ if (vacia == false) {
 </head>
 <body>
 
-<h1>Atenciones registradas</h1>
+	<h1>Atenciones registradas</h1>
 
 	<table>
 
 		<td><b> ID ATENCIÓN </b></td>
 		<td><b> FECHA ATENCIÓN </b></td>
-		<td><b> DESCRIPCIÓN </b></td>
+		<td><b> TRATAMIENTO </b></td>
 		<td><b> OBSERVACIONES </b></td>
 		<td><b> PRECIO TRATAMIENTO </b></td>
 		<td><b> APELLIDO DOCTOR </b></td>
@@ -41,12 +41,19 @@ if (vacia == false) {
 
 		<%
 		for (Atencion a : atenciones) {
+
+			String obs = a.getObservaciones();
+			if (obs == null) {
+				obs = "-";
+			} else {
+				obs = a.getObservaciones();
+			}
 		%>
 		<tr>
 			<td><%=a.getIdAtencion()%></td>
 			<td><%=a.getFecha()%></td>
 			<td><%=a.getTratamiento().getDescripcion()%></td>
-			<td><%=a.getObservaciones()%></td>
+			<td><%=obs%></td>
 			<td>$<%=a.getTratamiento().getCosto()%></td>
 			<td><%=a.getOdontologo().getApellido()%></td>
 			<td><%=a.getOdontologo().getNombre()%></td>

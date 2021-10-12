@@ -1,3 +1,4 @@
+<%@page import="entities.ObraSocial"%>
 <%@page import="entities.Paciente"%>
 <%@page import="java.util.LinkedList"%>
 <%@page session="false"%>
@@ -24,7 +25,7 @@ if (vacia == false) {
 </head>
 <body>
 
-<h1>Pacientes</h1>
+	<h1>Pacientes</h1>
 
 	<table>
 
@@ -38,6 +39,14 @@ if (vacia == false) {
 
 		<%
 		for (Paciente p : pacientes) {
+
+			String nombreOs = p.getOs().getNombre();
+
+			if (nombreOs == null) {
+				nombreOs = "-";
+			} else {
+				nombreOs = p.getOs().getNombre();
+			}
 		%>
 		<tr>
 			<td><%=p.getDni()%></td>
@@ -46,7 +55,7 @@ if (vacia == false) {
 			<td><%=p.getFecha_nac()%></td>
 			<td><%=p.getDireccion()%></td>
 			<td><%=p.getTelefono()%></td>
-			<td><%=p.getOs().getNombre()%></td>
+			<td><%=nombreOs%></td>
 		</tr>
 		<%
 		}
