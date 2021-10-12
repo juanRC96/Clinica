@@ -19,7 +19,6 @@ public class DataTratamiento {
 		try {
 			con = DbConnector.getConexion();
 			PreparedStatement ps = con.prepareStatement("SELECT idTratamiento,descripcion,costo FROM tratamiento");
-			// PreparedStatement ps = DbConnector.getConexion().prepareStatement();
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
@@ -69,7 +68,7 @@ public class DataTratamiento {
 			con = DbConnector.getConexion();
 			PreparedStatement ps = con.prepareStatement("DELETE FROM tratamiento WHERE idTratamiento=?");
 			ps.setInt(1, id);
-			
+
 			ps.executeUpdate();
 			con.close();
 		}

@@ -10,7 +10,7 @@ import entities.ObraSocial;
 public class DataObraSocial {
 
 	// MOSTRAR LISTADO CON LAS OBRAS SOCIALES
-	public LinkedList<ObraSocial> mostrarObrasSociales() {
+	public LinkedList<ObraSocial> mostrarObrasSociales() throws Exception {
 		Connection con = null;
 		ResultSet rs = null;
 
@@ -32,8 +32,9 @@ public class DataObraSocial {
 
 		}
 
-		catch (Exception p) {
+		catch (Exception e) {
 			System.err.println("Hubo un error en la conexion");
+			throw e;
 		}
 
 		return obrassociales;

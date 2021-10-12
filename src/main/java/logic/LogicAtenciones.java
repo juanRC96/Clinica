@@ -10,7 +10,7 @@ public class LogicAtenciones {
 	DataAtencion da = new DataAtencion();
 
 	// MOSTRAR LISTA ATENCIONES
-	public LinkedList<Atencion> mostrarAtenciones() {
+	public LinkedList<Atencion> mostrarAtenciones() throws Exception {
 		return da.mostrarAtenciones();
 	}
 

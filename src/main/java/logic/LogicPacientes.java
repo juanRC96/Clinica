@@ -10,12 +10,12 @@ public class LogicPacientes {
 	DataPacientes dp = new DataPacientes();
 
 	// LISTA CON TODOS LOS PACIENTES
-	public LinkedList<Paciente> mostrarPacientes() {
+	public LinkedList<Paciente> mostrarPacientes() throws Exception {
 		return dp.mostrarPacientes();
 	}
 
 	// VERIFICO SI YA ESTA REGISTRADO EL PACIENTE
-	public boolean verificarRegistro(Paciente p) {
+	public boolean verificarRegistro(Paciente p) throws Exception {
 		boolean disponible = dp.verificarRegistro(p);
 		return disponible;
 	}

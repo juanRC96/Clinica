@@ -10,7 +10,7 @@ import entities.Odontologo;
 public class DataOdontologos {
 
 	// CREO Y CARGO LA LISTA DE DOCTORES
-	public LinkedList<Odontologo> mostrarDoctores() {
+	public LinkedList<Odontologo> mostrarDoctores() throws Exception {
 		Connection con = null;
 		ResultSet rs = null;
 
@@ -34,8 +34,9 @@ public class DataOdontologos {
 
 		}
 
-		catch (Exception p) {
+		catch (Exception e) {
 			System.err.println("Hubo un error en la conexion");
+			throw e;
 		}
 
 		return doctores;
@@ -79,7 +80,7 @@ public class DataOdontologos {
 			con = DbConnector.getConexion();
 			PreparedStatement ps = con.prepareStatement("DELETE FROM odontologo WHERE matricula=?");
 			ps.setInt(1, matricula);
-			
+
 			ps.executeUpdate();
 			con.close();
 		}

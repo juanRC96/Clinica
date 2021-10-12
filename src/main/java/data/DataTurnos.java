@@ -35,16 +35,13 @@ public class DataTurnos {
 				Paciente p = new Paciente();
 				Odontologo o = new Odontologo();
 
-				// SETEO LOS DATOS DEL ODONTOLOGO
 				o.setApellido(rs.getString(1));
 				o.setNombre(rs.getString(2));
 				t.setOdontologo(o);
 
-				// SETEO DATOS DEL TURNO
 				t.setFecha(rs.getDate(3).toLocalDate());
 				t.setHora(rs.getTime(4).toLocalTime());
 
-				// SETEO DATOS DEL PACIENTE
 				p.setDni(rs.getInt(5));
 				p.setApellido(rs.getString(6));
 				p.setNombre(rs.getString(7));
@@ -69,7 +66,6 @@ public class DataTurnos {
 		ResultSet rs = null;
 		boolean disponible = false;
 
-		// ASIGNO A VARIABLES LOS DATOS TRAIDOS EN TURNO T
 		int matricula = t.getOdontologo().getMatricula();
 		LocalDate fecha = t.getFecha();
 		LocalTime hora = t.getHora();
@@ -101,7 +97,6 @@ public class DataTurnos {
 	public void registrarTurno(Turno t) throws Exception {
 		Connection con = null;
 
-		// ASIGNO A VARIABLES LOS DATOS TRAIDOS EN TURNO T
 		int dni = t.getPaciente().getDni();
 		int matricula = t.getOdontologo().getMatricula();
 		LocalDate fecha = t.getFecha();
@@ -113,8 +108,8 @@ public class DataTurnos {
 			PreparedStatement ps = con
 					.prepareStatement("INSERT INTO turno(dniPaciente,matricula,fecha,hora) " + "VALUES(?,?,?,?)");
 
-			ps.setInt(1, dni); // t.getPaciente().getDni()
-			ps.setInt(2, matricula);// t.getOdontologo().getMatricula()
+			ps.setInt(1, dni);
+			ps.setInt(2, matricula);
 			ps.setDate(3, java.sql.Date.valueOf(fecha));
 			ps.setTime(4, java.sql.Time.valueOf(hora));
 
@@ -178,16 +173,13 @@ public class DataTurnos {
 				Paciente p = new Paciente();
 				Odontologo o = new Odontologo();
 
-				// SETEO LOS DATOS DEL ODONTOLOGO
 				o.setApellido(rs.getString(1));
 				o.setNombre(rs.getString(2));
 				t.setOdontologo(o);
 
-				// SETEO DATOS DEL TURNO
 				t.setFecha(rs.getDate(3).toLocalDate());
 				t.setHora(rs.getTime(4).toLocalTime());
 
-				// SETEO DATOS DEL PACIENTE
 				p.setDni(rs.getInt(5));
 				p.setApellido(rs.getString(6));
 				p.setNombre(rs.getString(7));
@@ -232,16 +224,13 @@ public class DataTurnos {
 				Paciente p = new Paciente();
 				Odontologo o = new Odontologo();
 
-				// SETEO LOS DATOS DEL ODONTOLOGO
 				o.setApellido(rs.getString(1));
 				o.setNombre(rs.getString(2));
 				t.setOdontologo(o);
 
-				// SETEO DATOS DEL TURNO
 				t.setFecha(rs.getDate(3).toLocalDate());
 				t.setHora(rs.getTime(4).toLocalTime());
 
-				// SETEO DATOS DEL PACIENTE
 				p.setDni(rs.getInt(5));
 				p.setApellido(rs.getString(6));
 				p.setNombre(rs.getString(7));
@@ -285,16 +274,13 @@ public class DataTurnos {
 				Paciente p = new Paciente();
 				Odontologo o = new Odontologo();
 
-				// SETEO LOS DATOS DEL ODONTOLOGO
 				o.setApellido(rs.getString(1));
 				o.setNombre(rs.getString(2));
 				t.setOdontologo(o);
 
-				// SETEO DATOS DEL TURNO
 				t.setFecha(rs.getDate(3).toLocalDate());
 				t.setHora(rs.getTime(4).toLocalTime());
 
-				// SETEO DATOS DEL PACIENTE
 				p.setDni(rs.getInt(5));
 				p.setApellido(rs.getString(6));
 				p.setNombre(rs.getString(7));
@@ -337,16 +323,13 @@ public class DataTurnos {
 				Paciente pa = new Paciente();
 				Odontologo od = new Odontologo();
 
-				// SETEO LOS DATOS DEL ODONTOLOGO
 				od.setApellido(rs.getString(1));
 				od.setNombre(rs.getString(2));
 				tu.setOdontologo(od);
 
-				// SETEO DATOS DEL TURNO
 				tu.setFecha(rs.getDate(3).toLocalDate());
 				tu.setHora(rs.getTime(4).toLocalTime());
 
-				// SETEO DATOS DEL PACIENTE
 				pa.setDni(rs.getInt(5));
 				pa.setApellido(rs.getString(6));
 				pa.setNombre(rs.getString(7));

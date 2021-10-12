@@ -14,7 +14,7 @@ import entities.Tratamiento;
 public class DataAtencion {
 
 	// MOSTRAR ATENCIONES
-	public LinkedList<Atencion> mostrarAtenciones() {
+	public LinkedList<Atencion> mostrarAtenciones() throws Exception {
 		Connection con = null;
 		ResultSet rs = null;
 
@@ -64,8 +64,9 @@ public class DataAtencion {
 
 		}
 
-		catch (Exception p) {
+		catch (Exception e) {
 			System.err.println("Hubo un error en la conexion");
+			throw e;
 		}
 
 		return atenciones;
@@ -99,9 +100,9 @@ public class DataAtencion {
 
 		}
 
-		catch (Exception x) {
+		catch (Exception e) {
 			System.err.println("Hubo un error en la conexion");
-			throw x;
+			throw e;
 		}
 
 	}

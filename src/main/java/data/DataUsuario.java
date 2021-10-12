@@ -8,10 +8,7 @@ import entities.Usuario;
 
 public class DataUsuario {
 
-	// METODO PARA VALIDAR INICIO SESION
-	// BUSCO USUARIO EN BASE DE DATOS Y LO DEVUELVO AL SERVLET, SI NO HAY USUARIO,
-	// NO COINCIDEN LOS DATOS INGRESADOS CON LOS DE LA BASE DE DATOS
-	public Usuario iniciarSesion(Usuario us) {
+	public Usuario iniciarSesion(Usuario us) throws Exception {
 		Usuario usuario = null;
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -23,11 +20,9 @@ public class DataUsuario {
 			con = DbConnector.getConexion();
 			ps = con.prepareStatement("SELECT usuario,clave FROM usuarios WHERE usuario = ? AND clave = ?");
 
-			// ASIGNO VALORES A LOS SIGNOS DE PREGUNTA
 			ps.setString(1, username);
 			ps.setString(2, password);
 
-			// EJECUTO LA QUERY
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
@@ -37,7 +32,7 @@ public class DataUsuario {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw e;
 		}
 		// CIERRO LAS CONEXIONES
 		finally {
@@ -53,8 +48,8 @@ public class DataUsuario {
 				if (con != null) {
 					con.close();
 				}
-			} catch (Exception e2) {
-				e2.printStackTrace();
+			} catch (Exception e) {
+				throw e;
 			}
 		}
 

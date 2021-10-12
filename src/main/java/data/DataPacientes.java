@@ -12,7 +12,7 @@ import entities.Paciente;
 public class DataPacientes {
 
 	// LISTADO CON TODOS LOS PACIENTES
-	public LinkedList<Paciente> mostrarPacientes() {
+	public LinkedList<Paciente> mostrarPacientes() throws Exception {
 		Connection con = null;
 		ResultSet rs = null;
 
@@ -53,13 +53,14 @@ public class DataPacientes {
 
 		catch (Exception p) {
 			System.err.println("Hubo un error en la conexion");
+			throw p;
 		}
 
 		return pacientes;
 	}
 
 	// VERIFICO QUE EL PACIENTE NO ESTE REGISTRADO
-	public boolean verificarRegistro(Paciente p) {
+	public boolean verificarRegistro(Paciente p) throws Exception {
 		Connection con = null;
 		ResultSet rs = null;
 		boolean disponible = false;
@@ -69,22 +70,18 @@ public class DataPacientes {
 		try {
 
 			con = DbConnector.getConexion();
-			PreparedStatement ps = con.prepareStatement("SELECT dni FROM paciente");
+			PreparedStatement ps = con.prepareStatement("SELECT dni FROM paciente WHERE dni = ?");
+			ps.setInt(1, dni);
 			rs = ps.executeQuery();
 
-			while (rs.next()) {
-
-				if (dni == rs.getInt(1)) // FALTA COMPROBAR SI LA HORA ESTA DENTRO DE LAS DE TRABAJO
-				{
-					disponible = false;
-				} else {
-					disponible = true;
-				}
+			if (rs.next() == false) {
+				disponible = true;
 			}
 		}
 
 		catch (Exception e) {
 			System.err.println("Hubo un error en la conexion");
+			throw e;
 		}
 		return disponible;
 	}

@@ -10,7 +10,7 @@ public class LogicObraSocial {
 	DataObraSocial dob = new DataObraSocial();
 
 	// MOSTRAR OBRAS SOCIALES
-	public LinkedList<ObraSocial> mostrarObrasSociales() {
+	public LinkedList<ObraSocial> mostrarObrasSociales() throws Exception {
 		return dob.mostrarObrasSociales();
 	}
 

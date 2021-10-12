@@ -9,7 +9,7 @@ public class LogicOdontologos {
 
 	DataOdontologos dod = new DataOdontologos();
 
-	public LinkedList<Odontologo> mostrarOdontologos() {
+	public LinkedList<Odontologo> mostrarOdontologos() throws Exception {
 		return dod.mostrarDoctores();
 	}
 
