@@ -3,6 +3,7 @@ package data;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.LinkedList;
 
@@ -15,14 +16,14 @@ public class DataPacientes {
 	public LinkedList<Paciente> mostrarPacientes() throws Exception {
 		Connection con = null;
 		ResultSet rs = null;
+		PreparedStatement ps = null;
 
 		LinkedList<Paciente> pacientes = new LinkedList<Paciente>();
 
 		try {
-			con = DbConnector.getConexion();
-			PreparedStatement ps = con.prepareStatement(
-					"SELECT dni,pnombre,papellido,fecha_nac,direccion,tel,osnombre FROM paciente pac\r\n"
-							+ "LEFT JOIN obra_social os ON pac.obra_social=os.idObraSocial");
+			con = DbConnector.getInstancia().getConexion();
+			ps = con.prepareStatement("SELECT dni,pnombre,papellido,fecha_nac,direccion,tel,osnombre FROM paciente pac"
+					+ " LEFT JOIN obra_social os ON pac.obra_social=os.idObraSocial");
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
@@ -41,14 +42,27 @@ public class DataPacientes {
 
 				pacientes.add(p);
 			}
-
 		}
 
 		catch (Exception p) {
-			System.err.println("Hubo un error en la conexion");
+			System.err.println("Hubo un error");
 			throw p;
 		}
 
+		finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				DbConnector.getInstancia().desconectar();
+				;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		return pacientes;
 	}
 
@@ -56,14 +70,16 @@ public class DataPacientes {
 	public boolean verificarRegistro(Paciente p) throws Exception {
 		Connection con = null;
 		ResultSet rs = null;
+		PreparedStatement ps = null;
+
 		boolean disponible = false;
 
 		int dni = p.getDni();
 
 		try {
 
-			con = DbConnector.getConexion();
-			PreparedStatement ps = con.prepareStatement("SELECT dni FROM paciente WHERE dni = ?");
+			con = DbConnector.getInstancia().getConexion();
+			ps = con.prepareStatement("SELECT dni FROM paciente WHERE dni = ?");
 			ps.setInt(1, dni);
 			rs = ps.executeQuery();
 
@@ -73,15 +89,32 @@ public class DataPacientes {
 		}
 
 		catch (Exception e) {
-			System.err.println("Hubo un error en la conexion");
+			System.err.println("Hubo un error");
 			throw e;
 		}
+
+		finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				DbConnector.getInstancia().desconectar();
+				;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
 		return disponible;
 	}
 
 	// AGREGAR PACIENTE A LA LISTA
 	public void agregarPaciente(Paciente p) throws Exception {
 		Connection con = null;
+		PreparedStatement ps = null;
 
 		// ASIGNO A VARIABLES LOS DATOS TRAIDOS EN TURNO T
 		int dni = p.getDni();
@@ -97,10 +130,8 @@ public class DataPacientes {
 			int obrasocial = os.getId();
 
 			try {
-
-				con = DbConnector.getConexion();
-				PreparedStatement ps = con.prepareStatement(
-						"INSERT INTO paciente(dni,pnombre,papellido,fecha_nac,direccion,tel,obra_social) "
+				con = DbConnector.getInstancia().getConexion();
+				ps = con.prepareStatement("INSERT INTO paciente(dni,pnombre,papellido,fecha_nac,direccion,tel,obra_social) "
 								+ "VALUES(?,?,?,?,?,?,?)");
 
 				ps.setInt(1, dni);
@@ -117,18 +148,28 @@ public class DataPacientes {
 			}
 
 			catch (Exception e) {
-				System.err.println("Hubo un error en la conexion");
+				System.err.println("Hubo un error");
 				throw e;
 			}
 
+			finally {
+				try {
+					if (ps != null) {
+						ps.close();
+					}
+					DbConnector.getInstancia().desconectar();
+					;
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		// asigno paciente sin obra social
 		else {
 			try {
 
-				con = DbConnector.getConexion();
-				PreparedStatement ps = con.prepareStatement(
-						"INSERT INTO paciente(dni,pnombre,papellido,fecha_nac,direccion,tel) " + "VALUES(?,?,?,?,?,?)");
+				con = DbConnector.getInstancia().getConexion();
+				ps = con.prepareStatement("INSERT INTO paciente(dni,pnombre,papellido,fecha_nac,direccion,tel) VALUES(?,?,?,?,?,?)");
 
 				ps.setInt(1, dni);
 				ps.setString(2, nombre);
@@ -142,8 +183,20 @@ public class DataPacientes {
 			}
 
 			catch (Exception e) {
-				System.err.println("Hubo un error en la conexion");
+				System.err.println("Hubo un error");
 				throw e;
+			}
+
+			finally {
+				try {
+					if (ps != null) {
+						ps.close();
+					}
+					DbConnector.getInstancia().desconectar();
+					;
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
@@ -151,11 +204,13 @@ public class DataPacientes {
 	// BORRAR PACIENTE
 	public void borrarPaciente(Paciente p) throws Exception {
 		Connection con = null;
+		PreparedStatement ps = null;
+
 		int dni = p.getDni();
 
 		try {
-			con = DbConnector.getConexion();
-			PreparedStatement ps = con.prepareStatement("DELETE FROM paciente WHERE dni=?");
+			con = DbConnector.getInstancia().getConexion();
+			ps = con.prepareStatement("DELETE FROM paciente WHERE dni=?");
 			ps.setInt(1, dni);
 
 			ps.executeUpdate();
@@ -163,24 +218,37 @@ public class DataPacientes {
 		}
 
 		catch (Exception e) {
-			System.err.println("Hubo un error en la conexion");
+			System.err.println("Hubo un error");
 			throw e;
 		}
 
+		finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+				DbConnector.getInstancia().desconectar();
+				;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	// BUSCAR PACIENTES POR DNI
 	public LinkedList<Paciente> buscarPacienteporDni(Paciente pac) throws Exception {
 		Connection con = null;
 		ResultSet rs = null;
+		PreparedStatement ps = null;
+
 		int dni = pac.getDni();
 
 		LinkedList<Paciente> pacientes = new LinkedList<Paciente>();
 
 		try {
-			con = DbConnector.getConexion();
-			PreparedStatement ps = con.prepareStatement(
-					"SELECT dni,pnombre,papellido,fecha_nac,direccion,tel,osnombre FROM paciente pac LEFT JOIN obra_social os ON pac.obra_social=os.idObraSocial WHERE dni=?");
+			con = DbConnector.getInstancia().getConexion();
+			ps = con.prepareStatement("SELECT dni,pnombre,papellido,fecha_nac,direccion,tel,osnombre FROM paciente pac"
+					+ " LEFT JOIN obra_social os ON pac.obra_social=os.idObraSocial WHERE dni=?");
 			ps.setInt(1, dni);
 			rs = ps.executeQuery();
 
@@ -205,12 +273,26 @@ public class DataPacientes {
 
 				pacientes.add(p);
 			}
-
 		}
 
 		catch (Exception e) {
-			System.err.println("Hubo un error en la conexion");
+			System.err.println("Hubo un error");
 			throw e;
+		}
+
+		finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				DbConnector.getInstancia().desconectar();
+				;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return pacientes;
@@ -220,13 +302,14 @@ public class DataPacientes {
 	public Paciente buscarPacienteSolo(Paciente pac) throws Exception {
 		Connection con = null;
 		ResultSet rs = null;
+		PreparedStatement ps = null;
+
 		int dni = pac.getDni();
 		Paciente p = new Paciente();
 
 		try {
-			con = DbConnector.getConexion();
-			PreparedStatement ps = con
-					.prepareStatement("SELECT dni,pnombre,papellido,fecha_nac,direccion,tel FROM paciente WHERE dni=?");
+			con = DbConnector.getInstancia().getConexion();
+			ps = con.prepareStatement("SELECT dni,pnombre,papellido,fecha_nac,direccion,tel FROM paciente WHERE dni=?");
 			ps.setInt(1, dni);
 			rs = ps.executeQuery();
 
@@ -239,11 +322,25 @@ public class DataPacientes {
 		}
 
 		catch (Exception e) {
-			System.err.println("Hubo un error en la conexion");
+			System.err.println("Hubo un error");
 			throw e;
+		}
+
+		finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				DbConnector.getInstancia().desconectar();
+				;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return p;
 	}
-
 }

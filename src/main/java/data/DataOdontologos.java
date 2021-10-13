@@ -3,6 +3,7 @@ package data;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.LinkedList;
 
 import entities.Odontologo;
@@ -13,12 +14,13 @@ public class DataOdontologos {
 	public LinkedList<Odontologo> mostrarDoctores() throws Exception {
 		Connection con = null;
 		ResultSet rs = null;
+		PreparedStatement ps = null;
 
 		LinkedList<Odontologo> doctores = new LinkedList<Odontologo>();
 
 		try {
-			con = DbConnector.getConexion();
-			PreparedStatement ps = con.prepareStatement("SELECT matricula,onombre,oapellido FROM odontologo");
+			con = DbConnector.getInstancia().getConexion();
+			ps = con.prepareStatement("SELECT matricula,onombre,oapellido FROM odontologo");
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
@@ -31,7 +33,6 @@ public class DataOdontologos {
 
 				doctores.add(o);
 			}
-
 		}
 
 		catch (Exception e) {
@@ -39,12 +40,28 @@ public class DataOdontologos {
 			throw e;
 		}
 
+		finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				DbConnector.getInstancia().desconectar();
+				;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		return doctores;
 	}
 
 	// AGREGAR DOCTOR
 	public void agregarDoctor(Odontologo o) throws Exception {
 		Connection con = null;
+		PreparedStatement ps = null;
 
 		int matricula = o.getMatricula();
 		String apellido = o.getApellido();
@@ -52,9 +69,8 @@ public class DataOdontologos {
 
 		try {
 
-			con = DbConnector.getConexion();
-			PreparedStatement ps = con
-					.prepareStatement("INSERT INTO odontologo(matricula,oapellido,onombre) " + "VALUES(?,?,?)");
+			con = DbConnector.getInstancia().getConexion();
+			ps = con.prepareStatement("INSERT INTO odontologo(matricula,oapellido,onombre) VALUES(?,?,?)");
 
 			ps.setInt(1, matricula);
 			ps.setString(2, apellido);
@@ -62,23 +78,35 @@ public class DataOdontologos {
 
 			ps.executeUpdate();
 			con.close();
-
 		}
 
 		catch (Exception e) {
 			System.err.println("Hubo un error en la conexion");
 			throw e;
 		}
+		
+		finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+				DbConnector.getInstancia().desconectar();
+				;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	// BORRAR ODONTOLOGO
 	public void BorrarDoctor(Odontologo o) throws Exception {
 		Connection con = null;
+		PreparedStatement ps = null;
 		int matricula = o.getMatricula();
 
 		try {
-			con = DbConnector.getConexion();
-			PreparedStatement ps = con.prepareStatement("DELETE FROM odontologo WHERE matricula=?");
+			con = DbConnector.getInstancia().getConexion();
+			ps = con.prepareStatement("DELETE FROM odontologo WHERE matricula=?");
 			ps.setInt(1, matricula);
 
 			ps.executeUpdate();
@@ -88,6 +116,18 @@ public class DataOdontologos {
 		catch (Exception e) {
 			System.err.println("Hubo un error en la conexion");
 			throw e;
+		}
+		
+		finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+				DbConnector.getInstancia().desconectar();
+				;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

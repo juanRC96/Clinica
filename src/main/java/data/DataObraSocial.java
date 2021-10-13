@@ -3,6 +3,7 @@ package data;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.LinkedList;
 
 import entities.ObraSocial;
@@ -13,12 +14,13 @@ public class DataObraSocial {
 	public LinkedList<ObraSocial> mostrarObrasSociales() throws Exception {
 		Connection con = null;
 		ResultSet rs = null;
+		PreparedStatement ps = null;
 
 		LinkedList<ObraSocial> obrassociales = new LinkedList<ObraSocial>();
 
 		try {
-			con = DbConnector.getConexion();
-			PreparedStatement ps = con.prepareStatement("SELECT idObraSocial,osnombre FROM obra_social");
+			con = DbConnector.getInstancia().getConexion();
+			ps = con.prepareStatement("SELECT idObraSocial,osnombre FROM obra_social");
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
@@ -29,12 +31,26 @@ public class DataObraSocial {
 
 				obrassociales.add(o);
 			}
-
 		}
 
 		catch (Exception e) {
 			System.err.println("Hubo un error en la conexion");
 			throw e;
+		}
+
+		finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				DbConnector.getInstancia().desconectar();
+				;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return obrassociales;
@@ -43,13 +59,14 @@ public class DataObraSocial {
 	// AGREGAR OBRA SOCIAL
 	public void agregarObraSocial(ObraSocial o) throws Exception {
 		Connection con = null;
+		PreparedStatement ps = null;
 
 		String nombre = o.getNombre();
 
 		try {
 
-			con = DbConnector.getConexion();
-			PreparedStatement ps = con.prepareStatement("INSERT INTO obra_social(osnombre) " + "VALUES(?)");
+			con = DbConnector.getInstancia().getConexion();
+			ps = con.prepareStatement("INSERT INTO obra_social(osnombre) VALUES(?)");
 
 			ps.setString(1, nombre);
 
@@ -62,16 +79,29 @@ public class DataObraSocial {
 			System.err.println("Hubo un error en la conexion");
 			throw e;
 		}
+
+		finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+				DbConnector.getInstancia().desconectar();
+				;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	// BORRAR OBRA SOCIAL
 	public void borrarObraSocial(ObraSocial o) throws Exception {
 		Connection con = null;
+		PreparedStatement ps = null;
 		int id = o.getId();
 
 		try {
-			con = DbConnector.getConexion();
-			PreparedStatement ps = con.prepareStatement("DELETE FROM obra_social WHERE idObraSocial=?");
+			con = DbConnector.getInstancia().getConexion();
+			ps = con.prepareStatement("DELETE FROM obra_social WHERE idObraSocial=?");
 			ps.setInt(1, id);
 			ps.executeUpdate();
 			con.close();
@@ -81,6 +111,17 @@ public class DataObraSocial {
 			System.err.println("Hubo un error en la conexion");
 			throw e;
 		}
-	}
 
+		finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+				DbConnector.getInstancia().desconectar();
+				;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }

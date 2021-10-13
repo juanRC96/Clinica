@@ -3,6 +3,7 @@ package data;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.LinkedList;
@@ -17,16 +18,16 @@ public class DataTurnos {
 	public LinkedList<Turno> mostrarTurnos() throws Exception {
 		Connection con = null;
 		ResultSet rs = null;
+		PreparedStatement ps = null;
 
 		LinkedList<Turno> turnos = new LinkedList<Turno>();
 
 		try {
-			con = DbConnector.getConexion();
-			PreparedStatement ps = con
-					.prepareStatement("SELECT oapellido,onombre,fecha,hora,dni,papellido,pnombre FROM turno tur \r\n"
-							+ "INNER JOIN paciente pac ON pac.dni=tur.dniPaciente\r\n"
-							+ "INNER JOIN odontologo odo ON odo.matricula=tur.matricula\r\n"
-							+ "ORDER BY tur.fecha ASC");
+			con = DbConnector.getInstancia().getConexion();
+			ps = con.prepareStatement("SELECT oapellido,onombre,fecha,hora,dni,papellido,pnombre FROM turno tur"
+					+ " INNER JOIN paciente pac ON pac.dni=tur.dniPaciente"
+					+ " INNER JOIN odontologo odo ON odo.matricula=tur.matricula"
+					+ " ORDER BY tur.fecha ASC");
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
@@ -49,14 +50,28 @@ public class DataTurnos {
 
 				turnos.add(t);
 			}
-
 		}
 
 		catch (Exception e) {
-			System.err.println("Hubo un error en la conexion");
+			System.err.println("Hubo un error");
 			throw e;
 		}
 
+		// finalmente cierro las conexiones
+		finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				DbConnector.getInstancia().desconectar();
+				;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		return turnos;
 	}
 
@@ -64,6 +79,7 @@ public class DataTurnos {
 	public boolean validarDisponibilidad(Turno t) throws Exception {
 		Connection con = null;
 		ResultSet rs = null;
+		PreparedStatement ps = null;
 		boolean disponible = false;
 
 		int matricula = t.getOdontologo().getMatricula();
@@ -72,9 +88,8 @@ public class DataTurnos {
 
 		try {
 
-			con = DbConnector.getConexion();
-			PreparedStatement ps = con.prepareStatement(
-					"SELECT matricula,fecha,hora FROM turno WHERE matricula=? and fecha=? and hora=?");
+			con = DbConnector.getInstancia().getConexion();
+			ps = con.prepareStatement("SELECT matricula,fecha,hora FROM turno WHERE matricula=? and fecha=? and hora=?");
 			ps.setInt(1, matricula);
 			ps.setDate(2, java.sql.Date.valueOf(fecha));
 			ps.setTime(3, java.sql.Time.valueOf(hora));
@@ -87,8 +102,23 @@ public class DataTurnos {
 		}
 
 		catch (Exception e) {
-			System.err.println("Hubo un error en la conexion");
+			System.err.println("Hubo un error");
 			throw e;
+		}
+
+		finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				DbConnector.getInstancia().desconectar();
+				;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return disponible;
 	}
@@ -96,6 +126,7 @@ public class DataTurnos {
 	// REGISTRO EL TURNO, UNA VEZ QUE ESTA DISPONIBLE
 	public void registrarTurno(Turno t) throws Exception {
 		Connection con = null;
+		PreparedStatement ps = null;
 
 		int dni = t.getPaciente().getDni();
 		int matricula = t.getOdontologo().getMatricula();
@@ -104,9 +135,8 @@ public class DataTurnos {
 
 		try {
 
-			con = DbConnector.getConexion();
-			PreparedStatement ps = con
-					.prepareStatement("INSERT INTO turno(dniPaciente,matricula,fecha,hora) " + "VALUES(?,?,?,?)");
+			con = DbConnector.getInstancia().getConexion();
+			ps = con.prepareStatement("INSERT INTO turno(dniPaciente,matricula,fecha,hora) VALUES(?,?,?,?)");
 
 			ps.setInt(1, dni);
 			ps.setInt(2, matricula);
@@ -115,25 +145,37 @@ public class DataTurnos {
 
 			ps.executeUpdate();
 			con.close();
-
 		}
 
 		catch (Exception e) {
-			System.err.println("Hubo un error en la conexion");
+			System.err.println("Hubo un error");
 			throw e;
 		}
 
+		finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+				DbConnector.getInstancia().desconectar();
+				;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	// BORRAR TURNO
 	public void borrarTurno(Turno t) throws Exception {
 		Connection con = null;
+		PreparedStatement ps = null;
+
 		int dni = t.getPaciente().getDni();
 		LocalDate fecha = t.getFecha();
 
 		try {
-			con = DbConnector.getConexion();
-			PreparedStatement ps = con.prepareStatement("DELETE FROM turno WHERE dniPaciente=? and fecha=?");
+			con = DbConnector.getInstancia().getConexion();
+			ps = con.prepareStatement("DELETE FROM turno WHERE dniPaciente=? and fecha=?");
 			ps.setInt(1, dni);
 			ps.setDate(2, java.sql.Date.valueOf(fecha));
 
@@ -142,26 +184,38 @@ public class DataTurnos {
 		}
 
 		catch (Exception e) {
-			System.err.println("Hubo un error en la conexion");
+			System.err.println("Hubo un error");
 			throw e;
 		}
 
+		finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+				DbConnector.getInstancia().desconectar();
+				;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	// BUSCAR TURNO POR DNI DEL PACIENTE
 	public LinkedList<Turno> buscarTurnoporDni(Turno tur) throws Exception {
 		Connection con = null;
 		ResultSet rs = null;
+		PreparedStatement ps = null;  
+
 		int dni = tur.getPaciente().getDni();
 
 		LinkedList<Turno> turnos = new LinkedList<Turno>();
 
 		try {
-			con = DbConnector.getConexion();
-			PreparedStatement ps = con
-					.prepareStatement("SELECT oapellido,onombre,fecha,hora,dni,papellido,pnombre FROM turno tur \r\n"
-							+ "INNER JOIN paciente pac ON pac.dni=tur.dniPaciente\r\n"
-							+ "INNER JOIN odontologo odo ON odo.matricula=tur.matricula WHERE pac.dni=?");
+			con = DbConnector.getInstancia().getConexion();
+			ps = con.prepareStatement("SELECT oapellido,onombre,fecha,hora,dni,papellido,pnombre FROM turno tur"
+					+ " INNER JOIN paciente pac ON pac.dni=tur.dniPaciente"
+					+ " INNER JOIN odontologo odo ON odo.matricula=tur.matricula WHERE pac.dni=?");
 
 			ps.setInt(1, dni);
 
@@ -187,15 +241,27 @@ public class DataTurnos {
 
 				turnos.add(t);
 			}
-
 		}
 
 		catch (Exception e) {
-			System.err.println("Hubo un error en la conexion");
+			System.err.println("Hubo un error");
 			throw e;
-
 		}
 
+		finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				DbConnector.getInstancia().desconectar();
+				;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		return turnos;
 	}
 
@@ -203,16 +269,16 @@ public class DataTurnos {
 	public LinkedList<Turno> buscarTurnosMatricula(Turno tur) throws Exception {
 		Connection con = null;
 		ResultSet rs = null;
+		PreparedStatement ps = null;
 		int matricula = tur.getOdontologo().getMatricula();
 
 		LinkedList<Turno> turnos = new LinkedList<Turno>();
 
 		try {
-			con = DbConnector.getConexion();
-			PreparedStatement ps = con
-					.prepareStatement("SELECT oapellido,onombre,fecha,hora,dni,papellido,pnombre FROM turno tur \r\n"
-							+ "INNER JOIN paciente pac ON pac.dni=tur.dniPaciente\r\n"
-							+ "INNER JOIN odontologo odo ON odo.matricula=tur.matricula WHERE odo.matricula=?");
+			con = DbConnector.getInstancia().getConexion();
+			ps = con.prepareStatement("SELECT oapellido,onombre,fecha,hora,dni,papellido,pnombre FROM turno tur"
+					+ " INNER JOIN paciente pac ON pac.dni=tur.dniPaciente"
+					+ " INNER JOIN odontologo odo ON odo.matricula=tur.matricula WHERE odo.matricula=?");
 
 			ps.setInt(1, matricula);
 
@@ -238,14 +304,27 @@ public class DataTurnos {
 
 				turnos.add(t);
 			}
-
 		}
 
 		catch (Exception e) {
-			System.err.println("Hubo un error en la conexion");
+			System.err.println("Hubo un error");
 			throw e;
 		}
 
+		finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				DbConnector.getInstancia().desconectar();
+				;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		return turnos;
 	}
 
@@ -253,16 +332,16 @@ public class DataTurnos {
 	public LinkedList<Turno> buscarTurnoporFecha(Turno tur) throws Exception {
 		Connection con = null;
 		ResultSet rs = null;
+		PreparedStatement ps = null;
 		LocalDate fecha = tur.getFecha();
 
 		LinkedList<Turno> turnos = new LinkedList<Turno>();
 
 		try {
-			con = DbConnector.getConexion();
-			PreparedStatement ps = con
-					.prepareStatement("SELECT oapellido,onombre,fecha,hora,dni,papellido,pnombre FROM turno tur \r\n"
-							+ "INNER JOIN paciente pac ON pac.dni=tur.dniPaciente\r\n"
-							+ "INNER JOIN odontologo odo ON odo.matricula=tur.matricula WHERE tur.fecha=?");
+			con = DbConnector.getInstancia().getConexion();
+			ps = con.prepareStatement("SELECT oapellido,onombre,fecha,hora,dni,papellido,pnombre FROM turno tur"
+					+ " INNER JOIN paciente pac ON pac.dni=tur.dniPaciente"
+					+ " INNER JOIN odontologo odo ON odo.matricula=tur.matricula WHERE tur.fecha=?");
 
 			ps.setDate(1, java.sql.Date.valueOf(fecha));
 
@@ -288,14 +367,27 @@ public class DataTurnos {
 
 				turnos.add(t);
 			}
-
 		}
 
 		catch (Exception e) {
-			System.err.println("Hubo un error en la conexion");
+			System.err.println("Hubo un error");
 			throw e;
 		}
 
+		finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				DbConnector.getInstancia().desconectar();
+				;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		return turnos;
 	}
 
@@ -303,16 +395,16 @@ public class DataTurnos {
 	public Turno buscarDatosTurno(Turno t) throws Exception {
 		Connection con = null;
 		ResultSet rs = null;
+		PreparedStatement ps = null;
 		int dni = t.getPaciente().getDni();
 
 		Turno tu = new Turno();
 
 		try {
-			con = DbConnector.getConexion();
-			PreparedStatement ps = con
-					.prepareStatement("SELECT oapellido,onombre,fecha,hora,dni,papellido,pnombre FROM turno tur \r\n"
-							+ "INNER JOIN paciente pac ON pac.dni=tur.dniPaciente\r\n"
-							+ "INNER JOIN odontologo odo ON odo.matricula=tur.matricula WHERE pac.dni=?");
+			con = DbConnector.getInstancia().getConexion();
+			ps = con.prepareStatement("SELECT oapellido,onombre,fecha,hora,dni,papellido,pnombre FROM turno tur"
+					+ " INNER JOIN paciente pac ON pac.dni=tur.dniPaciente"
+					+ " INNER JOIN odontologo odo ON odo.matricula=tur.matricula WHERE pac.dni=?");
 
 			ps.setInt(1, dni);
 
@@ -336,14 +428,27 @@ public class DataTurnos {
 				tu.setPaciente(pa);
 
 			}
-
 		}
 
 		catch (Exception e) {
-			System.err.println("Hubo un error en la conexion");
+			System.err.println("Hubo un error");
 			throw e;
 		}
 
+		finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				DbConnector.getInstancia().desconectar();
+				;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		return tu;
 	}
 
@@ -351,16 +456,15 @@ public class DataTurnos {
 	public boolean existeTurno(Turno t) throws Exception {
 		Connection con = null;
 		ResultSet rs = null;
+		PreparedStatement ps = null;
 		boolean existe = false;
 
 		int dni = t.getPaciente().getDni();
 		LocalDate fecha = t.getFecha();
 
 		try {
-
-			con = DbConnector.getConexion();
-			PreparedStatement ps = con
-					.prepareStatement("SELECT dniPaciente,fecha FROM turno WHERE dniPaciente=? AND fecha=?");
+			con = DbConnector.getInstancia().getConexion();
+			ps = con.prepareStatement("SELECT dniPaciente,fecha FROM turno WHERE dniPaciente=? AND fecha=?");
 			ps.setInt(1, dni);
 			ps.setDate(2, java.sql.Date.valueOf(fecha));
 			rs = ps.executeQuery();
@@ -375,10 +479,24 @@ public class DataTurnos {
 		}
 
 		catch (Exception e) {
-			System.err.println("Hubo un error en la conexion");
+			System.err.println("Hubo un error");
 			throw e;
+		}
+
+		finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				DbConnector.getInstancia().desconectar();
+				;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return existe;
 	}
-
 }

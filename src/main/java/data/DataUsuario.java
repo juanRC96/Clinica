@@ -17,7 +17,7 @@ public class DataUsuario {
 		String password = us.getContraseña();
 
 		try {
-			con = DbConnector.getConexion();
+			con = DbConnector.getInstancia().getConexion();
 			ps = con.prepareStatement("SELECT usuario,clave FROM usuarios WHERE usuario = ? AND clave = ?");
 
 			ps.setString(1, username);

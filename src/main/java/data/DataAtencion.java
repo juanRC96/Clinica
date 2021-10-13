@@ -3,6 +3,7 @@ package data;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.LinkedList;
 
@@ -17,16 +18,17 @@ public class DataAtencion {
 	public LinkedList<Atencion> mostrarAtenciones() throws Exception {
 		Connection con = null;
 		ResultSet rs = null;
+		PreparedStatement ps = null;
 
 		LinkedList<Atencion> atenciones = new LinkedList<Atencion>();
 
 		try {
-			con = DbConnector.getConexion();
-			PreparedStatement ps = con.prepareStatement(
-					"SELECT idAtencion,fecha,descripcion,observaciones,costo,oapellido,onombre,pac.dni,papellido,pnombre FROM atencion ate\r\n"
-							+ "INNER JOIN tratamiento tra ON tra.idTratamiento=ate.tratamiento\r\n"
-							+ "INNER JOIN paciente pac ON pac.dni=ate.dni\r\n"
-							+ "INNER JOIN odontologo odo ON odo.matricula=ate.doctor\r\n" + "ORDER BY fecha DESC");
+			con = DbConnector.getInstancia().getConexion();
+			ps = con.prepareStatement(
+					"SELECT idAtencion,fecha,descripcion,observaciones,costo,oapellido,onombre,pac.dni,papellido,pnombre FROM atencion ate"
+							+ " INNER JOIN tratamiento tra ON tra.idTratamiento=ate.tratamiento"
+							+ " INNER JOIN paciente pac ON pac.dni=ate.dni"
+							+ " INNER JOIN odontologo odo ON odo.matricula=ate.doctor ORDER BY fecha DESC");
 
 			rs = ps.executeQuery();
 
@@ -53,7 +55,6 @@ public class DataAtencion {
 
 				atenciones.add(a);
 			}
-
 		}
 
 		catch (Exception e) {
@@ -61,13 +62,27 @@ public class DataAtencion {
 			throw e;
 		}
 
+		finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				DbConnector.getInstancia().desconectar();
+				;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		return atenciones;
-
 	}
 
 	// AGREGAR ATENCION
 	public void agregarAtencion(Atencion a) throws Exception {
 		Connection con = null;
+		PreparedStatement ps = null;
 
 		int dni = a.getPaciente().getDni();
 		int matricula = a.getOdontologo().getMatricula();
@@ -77,9 +92,8 @@ public class DataAtencion {
 
 		try {
 
-			con = DbConnector.getConexion();
-			PreparedStatement ps = con.prepareStatement(
-					"INSERT INTO atencion(dni,doctor,tratamiento,observaciones,fecha) " + "VALUES(?,?,?,?,?)");
+			con = DbConnector.getInstancia().getConexion();
+			ps = con.prepareStatement("INSERT INTO atencion(dni,doctor,tratamiento,observaciones,fecha) VALUES(?,?,?,?,?)");
 
 			ps.setInt(1, dni);
 			ps.setInt(2, matricula);
@@ -89,7 +103,6 @@ public class DataAtencion {
 
 			ps.executeUpdate();
 			con.close();
-
 		}
 
 		catch (Exception e) {
@@ -97,16 +110,28 @@ public class DataAtencion {
 			throw e;
 		}
 
+		finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+				DbConnector.getInstancia().desconectar();
+				;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	// BORRAR ATENCION
 	public void borrarAtencion(Atencion a) throws Exception {
 		Connection con = null;
+		PreparedStatement ps = null;
 		int id = a.getIdAtencion();
 
 		try {
-			con = DbConnector.getConexion();
-			PreparedStatement ps = con.prepareStatement("DELETE FROM atencion WHERE idAtencion=?");
+			con = DbConnector.getInstancia().getConexion();
+			ps = con.prepareStatement("DELETE FROM atencion WHERE idAtencion=?");
 			ps.setInt(1, id);
 			ps.executeUpdate();
 			con.close();
@@ -117,6 +142,16 @@ public class DataAtencion {
 			throw e;
 		}
 
+		finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+				DbConnector.getInstancia().desconectar();
+				;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
-
 }

@@ -10,31 +10,51 @@ public class DbConnector {
 	private static String dbuser = "root";
 	private static String dbpass = "1234";
 	private static String dbdriver = "com.mysql.cj.jdbc.Driver";
+	private static DbConnector instancia;
+	private Connection con = null;
 
-	// CARGO EL CONTROLADOR
-	public static void cargarControlador() {
+	// CARGAR DRIVER
+	private DbConnector() {
 		try {
 			Class.forName(dbdriver);
+			System.out.println("Controlador cargado");
 		} catch (ClassNotFoundException e) {
 			System.out.println("Error al cargar el controlador");
 			e.printStackTrace();
 		}
 	}
 
-	// ESTABLEZCO LA CONEXION
-	public static Connection getConexion() {
-		Connection conexion = null;
+	// CREAR NUEVA INSTANCIA DE LA CLASE DBCONNECTOR
+	public static DbConnector getInstancia() {
+		if (instancia == null) {
+			instancia = new DbConnector();
+		}
+		return instancia;
+	}
 
+	// CONECTAR
+	public Connection getConexion() {
 		try {
-			cargarControlador();
-			conexion = DriverManager.getConnection(dburl, dbuser, dbpass);
-			System.out.println("Conexión exitosa");
-
+			if (con == null || con.isClosed()) {
+				con = DriverManager.getConnection(dburl, dbuser, dbpass);
+				System.out.println("Conexión abierta");
+			}
 		} catch (SQLException e) {
 			System.out.println("Error en la conexión");
 			e.printStackTrace();
 		}
-
-		return conexion;
+		return con;
 	}
+
+	// DESCONECTAR
+	public void desconectar() {
+		try {
+			con.close();
+			System.out.println("Conexión cerrada");
+		} catch (SQLException e) {
+			System.out.println("Error al cerrar la conexión");
+			e.printStackTrace();
+		}
+	}
+
 }
