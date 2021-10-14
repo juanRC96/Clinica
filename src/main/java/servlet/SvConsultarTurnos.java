@@ -61,7 +61,7 @@ public class SvConsultarTurnos extends HttpServlet {
 					if (nivelAcceso.equals("publico")) {
 						response.sendRedirect("errorPublico.html");
 					} else {
-						response.sendRedirect("error.html");
+						response.sendRedirect("mostrarRespuesta.jsp?mensaje=Hubo un error");
 					}
 				}
 			}
@@ -70,7 +70,7 @@ public class SvConsultarTurnos extends HttpServlet {
 				if (nivelAcceso.equals("publico")) {
 					response.sendRedirect("errorDatosIngresadosPublico.html");
 				} else {
-					response.sendRedirect("errorDatosIngresados.html");
+					response.sendRedirect("mostrarRespuesta.jsp?mensaje=Error en los datos ingresados");
 				}
 			}
 		} else {

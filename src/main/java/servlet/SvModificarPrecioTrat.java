@@ -63,14 +63,14 @@ public class SvModificarPrecioTrat extends HttpServlet {
 
 					lt.modificarPrecioTrat(t);
 
-					response.sendRedirect("exitoReserva.html");
+					response.sendRedirect("mostrarRespuesta.jsp?mensaje=Precio de tratamiento modificado");
 				} catch (Exception e) {
-					response.sendRedirect("error.html");
+					response.sendRedirect("mostrarRespuesta.jsp?mensaje=Hubo un error");
 				}
 			}
-			
+
 			else {
-				response.sendRedirect("errorDatosIngresados.html");
+				response.sendRedirect("mostrarRespuesta.jsp?mensaje=Error en los datos ingresados");
 			}
 		} else {
 			response.sendRedirect("errorSesion.html");

@@ -47,12 +47,12 @@ public class SvBuscarPaciente extends HttpServlet {
 					request.setAttribute("tablaPacientes", pacientes);
 					request.getRequestDispatcher("mostrarListaPacientes.jsp").forward(request, response);
 				} catch (Exception e) {
-					response.sendRedirect("error.html");
+					response.sendRedirect("mostrarRespuesta.jsp?mensaje=Hubo un error"); 
 				}
 			}
 
 			else {
-				response.sendRedirect("errorDatosIngresados.html");
+				response.sendRedirect("mostrarRespuesta.jsp?mensaje=Error en los datos ingresados"); 
 			}
 
 		} else {

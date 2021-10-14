@@ -19,40 +19,35 @@ import logic.LogicTratamientos;
 @WebServlet("/svtraerlistatratamientos")
 public class SvTraerListaTratamientos extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
 
-    public SvTraerListaTratamientos() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	public SvTraerListaTratamientos() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		HttpSession session=request.getSession(false);  
-        if(session!=null)
-        {
-		LogicTratamientos lt = new LogicTratamientos();
-		try 
-		{
-			LinkedList<Tratamiento> tratamientos = lt.MostrarTratamientos();
-			request.setAttribute("tablaTratamientos", tratamientos);
-			request.getRequestDispatcher("modificarPrecioTratamiento.jsp").forward(request, response);;
-		} 
-		catch (Exception e) 
-		{
-			response.sendRedirect("error.html");
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			LogicTratamientos lt = new LogicTratamientos();
+			try {
+				LinkedList<Tratamiento> tratamientos = lt.MostrarTratamientos();
+				request.setAttribute("tablaTratamientos", tratamientos);
+				request.getRequestDispatcher("modificarPrecioTratamiento.jsp").forward(request, response);
+				;
+			} catch (Exception e) {
+				response.sendRedirect("mostrarRespuesta.jsp?mensaje=Hubo un error");
+			}
+		} else {
+			response.sendRedirect("errorSesion.html");
 		}
-        }
-        else 
-        {
-        	response.sendRedirect("errorSesion.html");
-        }	
 	}
 
 }

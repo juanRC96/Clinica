@@ -74,16 +74,16 @@ public class SvBorrarTurno extends HttpServlet {
 					t.setFecha(fecha);
 
 					lt.borrarTurno(t);
-					response.sendRedirect("exitoBorrado.html");
+					response.sendRedirect("mostrarRespuesta.jsp?mensaje=Turno borrado"); 
 				}
 
 				catch (Exception e) {
-					response.sendRedirect("errorBorrado.html");
+					response.sendRedirect("mostrarRespuesta.jsp?mensaje=Error en el borrado"); 
 				}
 			}
 
 			else {
-				response.sendRedirect("errorDatosIngresados.html");
+				response.sendRedirect("mostrarRespuesta.jsp?mensaje=Error en los datos ingresados"); 
 			}
 
 		} else {

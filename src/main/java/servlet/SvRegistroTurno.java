@@ -88,7 +88,7 @@ public class SvRegistroTurno extends HttpServlet {
 						if (nivelAcceso.equals("publico")) {
 							response.sendRedirect("errorRegistroTurnoPublico.html");
 						} else {
-							response.sendRedirect("errorRegistroTurno.html");
+							response.sendRedirect("mostrarRespuesta.jsp?mensaje=Turno ocupado");
 						}
 					}
 
@@ -96,14 +96,14 @@ public class SvRegistroTurno extends HttpServlet {
 					if (nivelAcceso.equals("publico")) {
 						response.sendRedirect("errorReservaPublico.html");
 					} else {
-						response.sendRedirect("errorReserva.html");
+						response.sendRedirect("mostrarRespuesta.jsp?mensaje=Error en el registro del turno");
 					}
 				}
 			} else {
 				if (nivelAcceso.equals("publico")) {
 					response.sendRedirect("errorDatosIngresadosPublico.html");
 				} else {
-					response.sendRedirect("errorDatosIngresados.html");
+					response.sendRedirect("mostrarRespuesta.jsp?mensaje=Error en los datos ingresados");
 				}
 			}
 		} else {

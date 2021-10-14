@@ -20,35 +20,32 @@ import entities.Turno;
 public class SvMostrarTurnos extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
+
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-		//VALIDO QUE LA SESION HAYA SIDO INICIADA false will return current session if current session exists. If not, it will not create a new session.
-		HttpSession session=request.getSession(false);  
-	        if(session!=null)
-	        {  
-	        	LogicTurnos lt = new LogicTurnos();
-	        	
-	    		try 
-	    		{
-	    			LinkedList<Turno> turnos = lt.mostrarTurnos();
-	    			request.setAttribute("tablaTurnos", turnos);
-	    			request.getRequestDispatcher("mostrarListaTurnos.jsp").forward(request, response);
-	    		} 
-	    		catch (Exception e) 
-	    		{
-	    			response.sendRedirect("error.html");
-	    		}
-	        }  
-	        else
-	        {  
-	            response.sendRedirect("errorSesion.html");
-	        }  
+		// VALIDO QUE LA SESION HAYA SIDO INICIADA false will return current session if
+		// current session exists. If not, it will not create a new session.
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			LogicTurnos lt = new LogicTurnos();
+
+			try {
+				LinkedList<Turno> turnos = lt.mostrarTurnos();
+				request.setAttribute("tablaTurnos", turnos);
+				request.getRequestDispatcher("mostrarListaTurnos.jsp").forward(request, response);
+			} catch (Exception e) {
+				response.sendRedirect("mostrarRespuesta.jsp?mensaje=Hubo un error");
+			}
+		} else {
+			response.sendRedirect("errorSesion.html");
+		}
 
 	}
 }

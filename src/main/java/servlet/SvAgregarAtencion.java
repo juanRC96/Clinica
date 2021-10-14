@@ -70,15 +70,15 @@ public class SvAgregarAtencion extends HttpServlet {
 
 					la.agregarAtencion(a);
 
-					response.sendRedirect("exitoReserva.html");
+					response.sendRedirect("mostrarRespuesta.jsp?mensaje=Atencion registrada"); 
 				}
 
 				catch (Exception x) {
-					response.sendRedirect("errorReserva.html");
+					response.sendRedirect("mostrarRespuesta.jsp?mensaje=Error en el registro"); 
 				}
 
 			} else {
-				response.sendRedirect("errorDatosIngresados.html");
+				response.sendRedirect("mostrarRespuesta.jsp?mensaje=Error en los datos ingresados"); 
 			}
 
 		} else {

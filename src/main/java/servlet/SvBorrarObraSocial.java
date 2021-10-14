@@ -44,13 +44,13 @@ public class SvBorrarObraSocial extends HttpServlet {
 					o.setId(id);
 
 					lo.borrarObraSocial(o);
-					response.sendRedirect("exitoBorrado.html");
+					response.sendRedirect("mostrarRespuesta.jsp?mensaje=Obra social borrada"); 
 				} catch (Exception e) {
-					response.sendRedirect("errorBorrado.html");
+					response.sendRedirect("mostrarRespuesta.jsp?mensaje=Error en el borrado"); 
 				}
 
 			} else {
-				response.sendRedirect("errorDatosIngresados.html");
+				response.sendRedirect("mostrarRespuesta.jsp?mensaje=Error en los datos ingresados"); 
 			}
 
 		} else {

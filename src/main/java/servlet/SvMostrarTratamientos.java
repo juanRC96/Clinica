@@ -36,7 +36,7 @@ public class SvMostrarTratamientos extends HttpServlet {
 		} 
 		catch (Exception e) 
 		{
-			response.sendRedirect("error.html");
+			response.sendRedirect("mostrarRespuesta.jsp?mensaje=Hubo un error");
 		}
 		
 	}

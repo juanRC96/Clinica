@@ -40,6 +40,7 @@ public class SvMostrarPacientes extends HttpServlet {
 				request.getRequestDispatcher("mostrarListaPacientes.jsp").forward(request, response);
 			} catch (Exception e) {
 				response.sendRedirect("error.html");
+				response.sendRedirect("mostrarRespuesta.jsp?mensaje=Hubo un error");
 			}
 		}
 

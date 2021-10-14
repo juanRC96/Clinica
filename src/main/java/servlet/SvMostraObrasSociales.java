@@ -19,39 +19,33 @@ import logic.LogicObraSocial;
 @WebServlet("/svmostraobrassociales")
 public class SvMostraObrasSociales extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		HttpSession session=request.getSession(false);  
-        if(session!=null)
-        {  	
-        	LogicObraSocial lo = new LogicObraSocial();
-        
-			
-			try 
-			{
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			LogicObraSocial lo = new LogicObraSocial();
+
+			try {
 				LinkedList<ObraSocial> obrassociales = lo.mostrarObrasSociales();
 				request.setAttribute("tablaOS", obrassociales);
 				request.getRequestDispatcher("mostrarListaOS.jsp").forward(request, response);
-			} 
-			catch (Exception e) 
-			{
-				response.sendRedirect("error.html");
+			} catch (Exception e) {
+				response.sendRedirect("mostrarRespuesta.jsp?mensaje=Hubo un error");
 			}
-        }
-        
-        else
-        {
-        	response.sendRedirect("errorSesion.html");
-        }
-		
+		}
+
+		else {
+			response.sendRedirect("errorSesion.html");
+		}
+
 	}
 
 }

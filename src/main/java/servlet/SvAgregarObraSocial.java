@@ -46,13 +46,13 @@ public class SvAgregarObraSocial extends HttpServlet {
 				try {
 					o.setNombre(nombre);
 					lo.agregarObraSocial(o);
-					response.sendRedirect("exitoReserva.html");
+					response.sendRedirect("mostrarRespuesta.jsp?mensaje=Obra social registrada"); 
 				} catch (Exception e) {
-					response.sendRedirect("errorReserva.html");
+					response.sendRedirect("mostrarRespuesta.jsp?mensaje=Error en el registro"); 
 				}
 
 			} else {
-				response.sendRedirect("errorDatosIngresados.html");
+				response.sendRedirect("mostrarRespuesta.jsp?mensaje=Error en los datos ingresados"); 
 			}
 		}
 

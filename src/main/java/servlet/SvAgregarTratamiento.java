@@ -46,13 +46,13 @@ public class SvAgregarTratamiento extends HttpServlet {
 
 					lt.agregarTratamiento(t);
 
-					response.sendRedirect("exitoReserva.html");
+					response.sendRedirect("mostrarRespuesta.jsp?mensaje=Tratamiento registrado"); 
 				} catch (Exception e) {
-					response.sendRedirect("errorReserva.html");
+					response.sendRedirect("mostrarRespuesta.jsp?mensaje=Error en el registro"); 
 				}
 
 			} else {
-				response.sendRedirect("errorDatosIngresados.html");
+				response.sendRedirect("mostrarRespuesta.jsp?mensaje=Error en los datos ingresados"); 
 			}
 
 		} else {

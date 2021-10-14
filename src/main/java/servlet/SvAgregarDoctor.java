@@ -48,18 +48,18 @@ public class SvAgregarDoctor extends HttpServlet {
 
 					lo.agregarDoctor(o);
 
-					response.sendRedirect("exitoReserva.html");
+					response.sendRedirect("mostrarRespuesta.jsp?mensaje=Odontologo registrado");  
 				}
 
 				catch (Exception e) {
-					response.sendRedirect("errorReserva.html");
+					response.sendRedirect("mostrarRespuesta.jsp?mensaje=Error en el registro");  
 				}
 			} else {
-				response.sendRedirect("errorDatosIngresados.html");
+				response.sendRedirect("mostrarRespuesta.jsp?mensaje=Error en los datos ingresados");  
 			}
 
 		} else {
-			response.sendRedirect("errorSesion.html");
+			response.sendRedirect("errorSesion.html");  
 		}
 	}
 

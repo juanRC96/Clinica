@@ -13,45 +13,36 @@ import javax.servlet.http.HttpSession;
 import entities.Odontologo;
 import logic.LogicOdontologos;
 
-
-
 @WebServlet("/svmostrardoctores")
 public class SvMostrarDoctores extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		HttpSession session=request.getSession(false);  
-        if(session!=null)
-        {  	
-        	LogicOdontologos lo = new LogicOdontologos();
-        
-			
-			try 
-			{
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			LogicOdontologos lo = new LogicOdontologos();
+
+			try {
 				LinkedList<Odontologo> doctores = lo.mostrarOdontologos();
 				request.setAttribute("tablaDoctores", doctores);
 				request.getRequestDispatcher("mostrarListaDoctores.jsp").forward(request, response);
-			} 
-			catch (Exception e) 
-			{
-				response.sendRedirect("error.html");
+			} catch (Exception e) {
+				response.sendRedirect("mostrarRespuesta.jsp?mensaje=Hubo un error");
 			}
-        }
-        
-        else
-        {
-        	response.sendRedirect("errorSesion.html");
-        }
+		}
 
-		
+		else {
+			response.sendRedirect("errorSesion.html");
+		}
+
 	}
 
 }
