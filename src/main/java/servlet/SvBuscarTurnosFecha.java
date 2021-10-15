@@ -42,7 +42,7 @@ public class SvBuscarTurnosFecha extends HttpServlet {
 			if (fechaString != "") {
 
 				try {
-					LocalDate fecha = LocalDate.parse(fechaString, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+					LocalDate fecha = LocalDate.parse(fechaString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
 					t.setFecha(fecha);
 

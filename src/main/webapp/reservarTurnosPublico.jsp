@@ -12,15 +12,6 @@
 <title>reservarturnos</title>
 
 <link rel="stylesheet" type="text/css" href="estilo_ingresarDatos.css">
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
-	$(function() {
-		$("#datepicker").datepicker();
-	});
-</script>
 
 </head>
 <body>
@@ -114,8 +105,8 @@
 		<div>
 			<p>
 
-				<label for="datepicker">Fecha turno</label> <input type="text"
-					name="fecha" id="datepicker">
+				<label>Ingrese la fecha </label> <input type="date" id="start"
+					name="fecha" min="" max="">
 
 			</p>
 		</div>

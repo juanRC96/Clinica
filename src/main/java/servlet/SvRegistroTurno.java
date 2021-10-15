@@ -51,6 +51,7 @@ public class SvRegistroTurno extends HttpServlet {
 			String dniString = request.getParameter("dni");
 			String matriculaString = request.getParameter("matricula");
 			String fechaString = request.getParameter("fecha");
+			System.out.print(fechaString);
 			String horaString = request.getParameter("horario");
 
 			if (dniString != "" && matriculaString != "" && fechaString != "" && horaString != "") {
@@ -59,7 +60,7 @@ public class SvRegistroTurno extends HttpServlet {
 					int dni = Integer.parseInt(dniString);
 					int matricula = Integer.parseInt(matriculaString);
 
-					LocalDate fecha = LocalDate.parse(fechaString, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+					LocalDate fecha = LocalDate.parse(fechaString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 					LocalTime horario = LocalTime.parse(horaString, DateTimeFormatter.ofPattern("HH:mm:ss"));
 
 					// LE ASIGNO A LA NUEVA INSTANCIA LOS VALORES DE LAS VARIABLES

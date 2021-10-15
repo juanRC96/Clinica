@@ -66,7 +66,7 @@ public class SvBorrarTurno extends HttpServlet {
 				try {
 					int dni = Integer.parseInt(dniString);
 
-					LocalDate fecha = LocalDate.parse(fechaString, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+					LocalDate fecha = LocalDate.parse(fechaString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
 					p.setDni(dni);
 					t.setPaciente(p);

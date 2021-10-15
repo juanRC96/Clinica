@@ -53,7 +53,7 @@ public class SvAgregarAtencion extends HttpServlet {
 					int dni = Integer.parseInt(dniString);
 					int matricula = Integer.parseInt(matriculaString);
 					int tratamiento = Integer.parseInt(tratamientoString);
-					LocalDate fecha = LocalDate.parse(fechaString, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+					LocalDate fecha = LocalDate.parse(fechaString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
 					// LE ASIGNO A LA NUEVA INSTANCIA LOS VALORES DE LAS VARIABLES
 					p.setDni(dni);

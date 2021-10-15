@@ -61,9 +61,8 @@ public class SvAgregarPaciente extends HttpServlet {
 						p.setOs(os);
 					}
 
-					LocalDate fecha_nac = LocalDate.parse(fechaString, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-
-					// LE ASIGNO A LA NUEVA INSTANCIA LOS VALORES DE LAS VARIABLES
+					LocalDate fecha_nac = LocalDate.parse(fechaString, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+					
 					p.setDni(dni);
 					p.setNombre(nombre);
 					p.setApellido(apellido);
