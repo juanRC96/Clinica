@@ -64,20 +64,20 @@ public class SvBuscarPacienteSolo extends HttpServlet {
 
 				} catch (Exception e) {
 					if (nivelAcceso.equals("publico")) {
-						response.sendRedirect("errorPublico.html");
+						response.sendRedirect("respuestaPublico.jsp?mensaje=Hubo un error"); 
 					} else {
-						response.sendRedirect("mostrarRespuesta.jsp?mensaje=Hubo un error"); 
+						response.sendRedirect("respuestaPrivado.jsp?mensaje=Hubo un error"); 
 					}
 				}
 			} else {
 				if (nivelAcceso.equals("publico")) {
-					response.sendRedirect("errorDatosIngresadosPublico.html");
+					response.sendRedirect("respuestaPublico.jsp?mensaje=Error en los datos ingresados"); 
 				} else {
-					response.sendRedirect("mostrarRespuesta.jsp?mensaje=Error en los datos ingresados"); 
+					response.sendRedirect("respuestaPrivado.jsp?mensaje=Error en los datos ingresados"); 
 				}
 			}
 		} else {
-			response.sendRedirect("errorSesion.html");
+			response.sendRedirect("respuestaPublico.jsp?mensaje=Sesion no iniciada"); 
 		}
 	}
 

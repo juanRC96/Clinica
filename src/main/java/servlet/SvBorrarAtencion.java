@@ -42,17 +42,17 @@ public class SvBorrarAtencion extends HttpServlet {
 					a.setIdAtencion(id);
 
 					la.borrarAtencion(a);
-					response.sendRedirect("mostrarRespuesta.jsp?mensaje=Atencion borrado"); 
+					response.sendRedirect("respuestaPrivado.jsp?mensaje=Atencion borrado"); 
 				} catch (Exception e) {
-					response.sendRedirect("mostrarRespuesta.jsp?mensaje=Error en el borrado"); 
+					response.sendRedirect("respuestaPrivado.jsp?mensaje=Error en el borrado"); 
 				}
 
 			} else {
-				response.sendRedirect("mostrarRespuesta.jsp?mensaje=Error en los datos ingresados"); 
+				response.sendRedirect("respuestaPrivado.jsp?mensaje=Error en los datos ingresados"); 
 			}
 
 		} else {
-			response.sendRedirect("errorSesion.html");
+			response.sendRedirect("respuestaPublico.jsp?mensaje=Sesion no iniciada"); 
 		}
 	}
 

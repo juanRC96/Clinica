@@ -43,12 +43,12 @@ public class SvMostrarAtenciones extends HttpServlet {
 				request.setAttribute("tablaAtenciones", atenciones);
 				request.getRequestDispatcher("mostrarListaAtenciones.jsp").forward(request, response);
 			} catch (Exception e) {
-				response.sendRedirect("mostrarRespuesta.jsp?mensaje=Hubo un error");
+				response.sendRedirect("respuestaPrivado.jsp?mensaje=Hubo un error");
 			}
 		}
 
 		else {
-			response.sendRedirect("errorSesion.html");
+			response.sendRedirect("respuestaPublico.jsp?mensaje=Sesion no iniciada"); 
 		}
 
 	}

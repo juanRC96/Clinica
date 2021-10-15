@@ -40,15 +40,14 @@ public class SvLogin extends HttpServlet {
 			Usuario usuario = lg.iniciarSesion(us);
 
 			if (usuario == null) {
-				request.setAttribute("mensaje", "Error nombre de usuario y/o clave");
-				response.sendRedirect("errorLogin.html");
+				response.sendRedirect("respuestaPublico.jsp?mensaje=Usuario o contraseña incorrecto"); 
 			} else {
 				HttpSession session = request.getSession();
 				session.setAttribute("user", user);
 				response.sendRedirect("menuGeneral.html");
 			}
 		} catch (Exception e) {
-			response.sendRedirect("errorPublico.html");
+			response.sendRedirect("respuestaPublico.jsp?mensaje=Hubo un error"); 
 		}
 	}
 

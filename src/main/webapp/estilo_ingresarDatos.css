@@ -2,7 +2,7 @@
 
 Body {
 	font-family: Candara;
-	background-color: #C1C1C1;
+	background-image: url("https://www.teahub.io/photos/full/36-360758_blue-gradient-wallpaper-hd..jpg");
 	font-size: 18px;
 }
 
@@ -32,8 +32,8 @@ form {
 	display: inline;
 }
 
-button {
-	background-color: #000000;
+Button {
+	background-color: #21618C;
 	width: 200px;
 	color: rgb(255, 255, 255);
 	padding: 20px;
@@ -44,7 +44,9 @@ button {
 	font-size: 20px;
 	text-align: center;
 	border-radius: 10px;
+	box-shadow: 5px 5px 3px #17202A;
 }
+
 
 button:hover {
 	opacity: 0.5;

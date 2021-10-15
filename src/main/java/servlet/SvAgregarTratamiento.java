@@ -46,17 +46,17 @@ public class SvAgregarTratamiento extends HttpServlet {
 
 					lt.agregarTratamiento(t);
 
-					response.sendRedirect("mostrarRespuesta.jsp?mensaje=Tratamiento registrado"); 
+					response.sendRedirect("respuestaPrivado.jsp?mensaje=Tratamiento registrado"); 
 				} catch (Exception e) {
-					response.sendRedirect("mostrarRespuesta.jsp?mensaje=Error en el registro"); 
+					response.sendRedirect("respuestaPrivado.jsp?mensaje=Error en el registro"); 
 				}
 
 			} else {
-				response.sendRedirect("mostrarRespuesta.jsp?mensaje=Error en los datos ingresados"); 
+				response.sendRedirect("respuestaPrivado.jsp?mensaje=Error en los datos ingresados"); 
 			}
 
 		} else {
-			response.sendRedirect("errorSesion.html");
+			response.sendRedirect("respuestaPublico.jsp?mensaje=Sesion no iniciada"); 
 		}
 
 	}

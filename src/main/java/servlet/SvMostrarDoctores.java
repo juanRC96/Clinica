@@ -35,12 +35,12 @@ public class SvMostrarDoctores extends HttpServlet {
 				request.setAttribute("tablaDoctores", doctores);
 				request.getRequestDispatcher("mostrarListaDoctores.jsp").forward(request, response);
 			} catch (Exception e) {
-				response.sendRedirect("mostrarRespuesta.jsp?mensaje=Hubo un error");
+				response.sendRedirect("respuestaPrivado.jsp?mensaje=Hubo un error");
 			}
 		}
 
 		else {
-			response.sendRedirect("errorSesion.html");
+			response.sendRedirect("respuestaPublico.jsp?mensaje=Sesion no iniciada"); 
 		}
 
 	}

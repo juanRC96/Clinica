@@ -74,30 +74,30 @@ public class SvAgregarPaciente extends HttpServlet {
 					lp.agregarPaciente(p);
 
 					if (nivelAcceso.equals("publico")) {
-						response.sendRedirect("exitoReservaPublico.html");
+						response.sendRedirect("respuestaPublico.jsp?mensaje=Paciente registrado"); 
 					} else {
-						response.sendRedirect("mostrarRespuesta.jsp?mensaje=Paciente registrado"); 
+						response.sendRedirect("respuestaPrivado.jsp?mensaje=Paciente registrado"); 
 					}
 				}
 
 				catch (Exception e) {
 					if (nivelAcceso.equals("publico")) {
-						response.sendRedirect("errorReservaPublico.html");
+						response.sendRedirect("respuestaPublico.jsp?mensaje=Error en el registro");
 					} else {
-						response.sendRedirect("mostrarRespuesta.jsp?mensaje=Error en el registro"); 
+						response.sendRedirect("respuestaPrivado.jsp?mensaje=Error en el registro"); 
 					}
 				}
 
 			} else {
 				if (nivelAcceso.equals("publico")) {
-					response.sendRedirect("errorDatosIngresadosPublico.html");
+					response.sendRedirect("respuestaPublico.jsp?mensaje=Error en los datos ingresados");
 				} else {
-					response.sendRedirect("mostrarRespuesta.jsp?mensaje=Error en los datos ingresados"); 
+					response.sendRedirect("respuestaPrivado.jsp?mensaje=Error en los datos ingresados"); 
 				}
 			}
 
 		} else {
-			response.sendRedirect("errorSesion.html");
+			response.sendRedirect("respuestaPublico.jsp?mensaje=Sesion no iniciada"); 
 		}
 	}
 }

@@ -2,10 +2,11 @@
 
 Body {
 	font-family: 'Candara', sans-serif;
-	background-color: #C1C1C1;
+	background-image: url("https://www.teahub.io/photos/full/36-360758_blue-gradient-wallpaper-hd..jpg");
 	opacity: 1;
 	display: flex;
 	min-height: 100vh;
+	font-style:#FFFFFF;
 }
 
 h3 {
@@ -14,9 +15,9 @@ h3 {
 }
 
 Button {
-	background-color: #000000;
+	background-color: #21618C;
 	width: 200px;
-	color: rgb(255, 255, 255);
+	color: #FFFFFF;
 	padding: 20px;
 	margin: 10px;
 	border: none;
@@ -25,6 +26,7 @@ Button {
 	font-size: 20px;
 	text-align: center;
 	border-radius: 10px;
+	box-shadow: 5px 5px 3px #17202A;
 }
 
 button:hover {
@@ -32,7 +34,7 @@ button:hover {
 }
 
 form {
-	background-color: #959595;
+	background-color: #3498DB;
 	margin: auto;
 	width: 90%;
 	max-width: 400px;
@@ -40,7 +42,7 @@ form {
 	border-radius: 10px;
 	box-shadow: 0 5px 10px -5px rgb(0 0 0/ 30%);
 	text-align: center;
-	font-style: #FFFFFF;
+	
 }
 
 input[type=text], input[type=password] {
@@ -51,4 +53,5 @@ input[type=text], input[type=password] {
 	border: 2px solid(0, 0, 0);
 	box-sizing: border-box;
 	font-family: Candara;
+	font-size: 15px;
 }

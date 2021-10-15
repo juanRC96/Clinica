@@ -44,17 +44,17 @@ public class SvBorrarObraSocial extends HttpServlet {
 					o.setId(id);
 
 					lo.borrarObraSocial(o);
-					response.sendRedirect("mostrarRespuesta.jsp?mensaje=Obra social borrada"); 
+					response.sendRedirect("respuestaPrivado.jsp?mensaje=Obra social borrada"); 
 				} catch (Exception e) {
-					response.sendRedirect("mostrarRespuesta.jsp?mensaje=Error en el borrado"); 
+					response.sendRedirect("respuestaPrivado.jsp?mensaje=Error en el borrado"); 
 				}
 
 			} else {
-				response.sendRedirect("mostrarRespuesta.jsp?mensaje=Error en los datos ingresados"); 
+				response.sendRedirect("respuestaPrivado.jsp?mensaje=Error en los datos ingresados"); 
 			}
 
 		} else {
-			response.sendRedirect("errorSesion.html");
+			response.sendRedirect("respuestaPublico.jsp?mensaje=Sesion no iniciada"); 
 		}
 
 	}

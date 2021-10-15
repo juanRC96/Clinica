@@ -42,20 +42,20 @@ public class SvBorrarTratamiento extends HttpServlet {
 					t.setIdTratamiento(id);
 
 					lt.borrarTratamiento(t);
-					response.sendRedirect("mostrarRespuesta.jsp?mensaje=Tratamiento borrado"); 
+					response.sendRedirect("respuestaPrivado.jsp?mensaje=Tratamiento borrado"); 
 				}
 
 				catch (Exception e) {
-					response.sendRedirect("mostrarRespuesta.jsp?mensaje=Error en el borrado"); 
+					response.sendRedirect("respuestaPrivado.jsp?mensaje=Error en el borrado"); 
 				}
 			}
 
 			else {
-				response.sendRedirect("mostrarRespuesta.jsp?mensaje=Error en los datos ingresados"); 
+				response.sendRedirect("respuestaPrivado.jsp?mensaje=Error en los datos ingresados"); 
 			}
 
 		} else {
-			response.sendRedirect("errorSesion.html");
+			response.sendRedirect("respuestaPublico.jsp?mensaje=Sesion no iniciada"); 
 		}
 	}
 }

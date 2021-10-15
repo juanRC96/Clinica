@@ -70,19 +70,19 @@ public class SvAgregarAtencion extends HttpServlet {
 
 					la.agregarAtencion(a);
 
-					response.sendRedirect("mostrarRespuesta.jsp?mensaje=Atencion registrada"); 
+					response.sendRedirect("respuestaPrivado.jsp?mensaje=Atencion registrada"); 
 				}
 
 				catch (Exception x) {
-					response.sendRedirect("mostrarRespuesta.jsp?mensaje=Error en el registro"); 
+					response.sendRedirect("respuestaPrivado.jsp?mensaje=Error en el registro"); 
 				}
 
 			} else {
-				response.sendRedirect("mostrarRespuesta.jsp?mensaje=Error en los datos ingresados"); 
+				response.sendRedirect("respuestaPrivado.jsp?mensaje=Error en los datos ingresados"); 
 			}
 
 		} else {
-			response.sendRedirect("errorSesion.html");
+			response.sendRedirect("respuestaPublico.jsp?mensaje=Sesion no iniciada"); 
 		}
 	}
 }

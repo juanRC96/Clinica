@@ -13,26 +13,26 @@ import javax.servlet.http.HttpSession;
 public class SvCerrarSesion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		HttpSession session = request.getSession(false);
-	
-		//VERIFICO SI LA SESION YA ESTE CERRADA
-		if(session==null)
-		{
-			response.sendRedirect("cerrarSesionError.html");
+
+		// VERIFICO SI LA SESION YA ESTE CERRADA
+		if (session == null) {
+			response.sendRedirect("respuestaPublico.jsp?mensaje=No hay sesion iniciada");
 		}
-		
-		else
-		{
+
+		else {
 			session.invalidate();
-			response.sendRedirect("cerrarSesion.html");
+			response.sendRedirect("respuestaPublico.jsp?mensaje=Sesion cerrada");
 		}
 
 	}

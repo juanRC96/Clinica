@@ -46,7 +46,7 @@ public class SvTraerListaTratamientos extends HttpServlet {
 				response.sendRedirect("mostrarRespuesta.jsp?mensaje=Hubo un error");
 			}
 		} else {
-			response.sendRedirect("errorSesion.html");
+			response.sendRedirect("respuestaPublico.jsp?mensaje=Sesion no iniciada"); 
 		}
 	}
 

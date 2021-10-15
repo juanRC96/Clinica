@@ -10,7 +10,7 @@
 <meta charset="ISO-8859-1">
 <title>turnos</title>
 
-<link rel="stylesheet" type="text/css" href="estilo_listaPublico.css">
+<link rel="stylesheet" type="text/css" href="estilo_lista.css">
 
 <%
 LinkedList<Turno> turnos = (LinkedList) request.getAttribute("tablaTurnos");

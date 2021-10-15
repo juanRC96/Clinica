@@ -51,15 +51,15 @@ public class SvBuscarTurnosFecha extends HttpServlet {
 					request.getRequestDispatcher("mostrarListaTurnos.jsp").forward(request, response);
 
 				} catch (Exception e) {
-					response.sendRedirect("mostrarRespuesta.jsp?mensaje=Hubo un error"); 
+					response.sendRedirect("respuestaPrivado.jsp?mensaje=Hubo un error"); 
 				}
 			}
 
 			else {
-				response.sendRedirect("mostrarRespuesta.jsp?mensaje=Error en los datos ingresados"); 
+				response.sendRedirect("respuestaPrivado.jsp?mensaje=Error en los datos ingresados"); 
 			}
 		} else {
-			response.sendRedirect("errorSesion.html");
+			response.sendRedirect("respuestaPublico.jsp?mensaje=Sesion no iniciada"); 
 		}
 
 	}

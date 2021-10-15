@@ -42,16 +42,16 @@ public class SvBorrarDoctor extends HttpServlet {
 					o.setMatricula(matricula);
 
 					lo.borrarDoctor(o);
-					response.sendRedirect("mostrarRespuesta.jsp?mensaje=Odontologo borrado"); 
+					response.sendRedirect("respuestaPrivado.jsp?mensaje=Odontologo borrado"); 
 				} catch (Exception e) {
-					response.sendRedirect("mostrarRespuesta.jsp?mensaje=Error en el borrado"); 
+					response.sendRedirect("respuestaPrivado.jsp?mensaje=Error en el borrado"); 
 				}
 			} else {
-				response.sendRedirect("mostrarRespuesta.jsp?mensaje=Error en los datos ingresados"); 
+				response.sendRedirect("respuestaPrivado.jsp?mensaje=Error en los datos ingresados"); 
 			}
 
 		} else {
-			response.sendRedirect("errorSesion.html");
+			response.sendRedirect("respuestaPublico.jsp?mensaje=Sesion no iniciada"); 
 		}
 
 	}

@@ -86,28 +86,28 @@ public class SvRegistroTurno extends HttpServlet {
 
 					} else {
 						if (nivelAcceso.equals("publico")) {
-							response.sendRedirect("errorRegistroTurnoPublico.html");
+							response.sendRedirect("respuestaPublico.jsp?mensaje=Turno ocupado");
 						} else {
-							response.sendRedirect("mostrarRespuesta.jsp?mensaje=Turno ocupado");
+							response.sendRedirect("respuestaPrivado.jsp?mensaje=Turno ocupado");
 						}
 					}
 
 				} catch (Exception e) {
 					if (nivelAcceso.equals("publico")) {
-						response.sendRedirect("errorReservaPublico.html");
+						response.sendRedirect("respuestaPublico.jsp?mensaje=Error en el registro del turno");
 					} else {
-						response.sendRedirect("mostrarRespuesta.jsp?mensaje=Error en el registro del turno");
+						response.sendRedirect("respuestaPrivado.jsp?mensaje=Error en el registro del turno");
 					}
 				}
 			} else {
 				if (nivelAcceso.equals("publico")) {
-					response.sendRedirect("errorDatosIngresadosPublico.html");
+					response.sendRedirect("respuestaPublico.jsp?mensaje=Error en los datos ingresados");
 				} else {
-					response.sendRedirect("mostrarRespuesta.jsp?mensaje=Error en los datos ingresados");
+					response.sendRedirect("respuestaPrivado.jsp?mensaje=Error en los datos ingresados");
 				}
 			}
 		} else {
-			response.sendRedirect("errorSesion.html");
+			response.sendRedirect("respuestaPublico.jsp?mensaje=Sesion no iniciada"); 
 		}
 	}
 }
