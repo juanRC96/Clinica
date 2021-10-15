@@ -2,8 +2,8 @@ package entities;
 
 public class Usuario {
 
-	String usuario;
-	String contraseña;
+	private String usuario;
+	private String contraseña;
 
 	public String getUsuario() {
 		return usuario;

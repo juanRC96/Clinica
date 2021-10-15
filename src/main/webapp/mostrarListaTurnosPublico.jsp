@@ -1,3 +1,6 @@
+<%@page import="java.time.format.FormatStyle"%>
+<%@page import="java.time.format.DateTimeFormatter"%>
+<%@page import="java.time.LocalDate"%>
 <%@page import="entities.Paciente"%>
 <%@page import="entities.Turno"%>
 <%@page import="java.util.LinkedList"%>
@@ -35,52 +38,14 @@ if (vacia == false) {
 		<%
 		for (Turno t : turnos) {
 
-			int mesValor = t.getFecha().getMonthValue();
-			String mesEspanol = null;
+			LocalDate fechaTurno = t.getFecha();
 
-			switch (mesValor) {
-			case 1:
-				mesEspanol = "enero";
-				break;
-			case 2:
-				mesEspanol = "febrero";
-				break;
-			case 3:
-				mesEspanol = "marzo";
-				break;
-			case 4:
-				mesEspanol = "abril";
-				break;
-			case 5:
-				mesEspanol = "mayo";
-				break;
-			case 6:
-				mesEspanol = "junio";
-				break;
-			case 7:
-				mesEspanol = "julio";
-				break;
-			case 8:
-				mesEspanol = "agosto";
-				break;
-			case 9:
-				mesEspanol = "septiembre";
-				break;
-			case 10:
-				mesEspanol = "octubre";
-				break;
-			case 11:
-				mesEspanol = "noviembre";
-				break;
-			case 12:
-				mesEspanol = "diciembre";
-				break;
-			}
+			String fechaTexto = fechaTurno.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
 		%>
 		<tr>
 			<td><%=t.getPaciente().getDni()%></td>
 			<td><%=t.getPaciente().getApellido()%>, <%=t.getPaciente().getNombre()%></td>
-			<td><%=t.getFecha().getDayOfMonth()%> de <%=mesEspanol%> del <%=t.getFecha().getYear()%></td>
+			<td><%=fechaTexto%></td>
 			<td><%=t.getHora()%> hs.</td>
 			<td><%=t.getOdontologo().getApellido()%>, <%=t.getOdontologo().getNombre()%></td>
 		</tr>

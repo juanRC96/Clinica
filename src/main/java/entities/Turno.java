@@ -5,11 +5,11 @@ import java.time.LocalTime;
 
 public class Turno {
 
-	int idTurno;
-	LocalDate fecha;
-	LocalTime hora;
-	Paciente paciente;
-	Odontologo odontologo;
+	private int idTurno;
+	private LocalDate fecha;
+	private LocalTime hora;
+	private Paciente paciente;
+	private Odontologo odontologo;
 
 	public Paciente getPaciente() {
 		return paciente;

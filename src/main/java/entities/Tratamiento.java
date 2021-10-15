@@ -2,9 +2,9 @@ package entities;
 
 public class Tratamiento {
 
-	int idTratamiento;
-	String descripcion;
-	int costo;
+	private int idTratamiento;
+	private String descripcion;
+	private int costo;
 
 	public int getIdTratamiento() {
 		return idTratamiento;

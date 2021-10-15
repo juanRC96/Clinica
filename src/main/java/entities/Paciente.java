@@ -4,13 +4,13 @@ import java.time.LocalDate;
 
 public class Paciente {
 
-	int dni;
-	String nombre;
-	String apellido;
-	LocalDate fecha_nac;
-	String direccion;
-	String telefono;
-	ObraSocial os;
+	private int dni;
+	private String nombre;
+	private String apellido;
+	private LocalDate fecha_nac;
+	private String direccion;
+	private String telefono;
+	private ObraSocial os;
 
 	public int getDni() {
 		return dni;

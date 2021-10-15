@@ -4,12 +4,12 @@ import java.time.LocalDate;
 
 public class Atencion {
 
-	int idAtencion;
-	String observaciones;
-	LocalDate fecha;
-	Tratamiento tratamiento;
-	Paciente paciente;
-	Odontologo odontologo;
+	private int idAtencion;
+	private String observaciones;
+	private LocalDate fecha;
+	private Tratamiento tratamiento;
+	private Paciente paciente;
+	private Odontologo odontologo;
 
 	public int getIdAtencion() {
 		return idAtencion;

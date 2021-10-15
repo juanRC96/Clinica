@@ -2,8 +2,8 @@ package entities;
 
 public class ObraSocial {
 
-	int id;
-	String nombre;
+	private int id;
+	private String nombre;
 
 	public int getId() {
 		return id;

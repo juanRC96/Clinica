@@ -2,9 +2,9 @@ package entities;
 
 public class Odontologo {
 
-	int matricula;
-	String nombre;
-	String apellido;
+	private int matricula;
+	private String nombre;
+	private String apellido;
 
 	public int getMatricula() {
 		return matricula;
