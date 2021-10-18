@@ -140,7 +140,7 @@
 
 	</form>
 
-	<form method="post" action="menuReservarTurnoPublico.html">
+	<form method="post" action="index.html">
 		<p>
 			<button id="bt3" type="submit">Volver</button>
 	</form>

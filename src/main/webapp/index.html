@@ -2,35 +2,95 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>index</title>
-
+<title>clinica</title>
 <link rel="stylesheet" type="text/css" href="estilo_index.css">
-
 </head>
 <body>
 
-	<h1>
-		<b>CLÍNICA UTN</b>
-	</h1>
+	<nav id="menu">
 
-	<h2>
-		<b>Seleccione una opción</b>
-	</h2>
+		<ul>
+			<li><a href="#">LA CLINICA</a>
+				<ul>
+					<li><a href="">HISTORIA</a></li>
+					<li><a href="">QUIENES SOMOS</a></li>
+					<li><a href="">TRAYECTORIA</a></li>
+				</ul></li>
 
-	<div style="text-align: center;">
+			<li><a href="#">TURNOS</a>
+				<ul>
+					<li><a href="reservarTurnosPublico.jsp">RESERVAR UN TURNO</a></li>
+					<li><a href="consultarTurnosPublico.html">CONSULTAR TURNOS</a></li>
+				</ul></li>
 
-		<form method="post" action="login.html">
-			<button id="iniciar" type="submit">Iniciar sesión como
-				administrador</button>
-		</form>
+			<li><a href="#">PACIENTES</a>
+				<ul>
+					<li><a href="agregarPacientePublico.jsp">REGISTRARME COMO PACIENTE</a></li>
+					<li><a href="consultarTurnosPublico.html">CONSULTAR MIS TURNOS</a></li>
+				</ul></li>
 
-		<form method="post" action="menuReservarTurnoPublico.html">
-			<button id="logout" type="submit">Reservar turno</button>
-		</form>
+			<li><a href="#">ADMINISTRADOR</a>
+				<ul>
+					<li><a href="login.html">INICIAR SESION</a></li>
+				</ul></li>
 
-		<form method="get" action="consultarTurnosPublico.html">
-			<button id="mostrar" type="submit">Consultar turnos por paciente</button>
-		</form>
+		</ul>
+
+	</nav>
+
+	<div class="contenedor">
+
+		<div class="opciones">
+
+			<img
+				src="https://www.odontologos.mx/noticias/noticias/nota-interna-experienciapaciente-clinica-1.jpg"
+				width="300" height="180">
+
+			<form method="post" action="">
+				<button id="bt1" type="submit">Ver sucursales</button>
+			</form>
+
+		</div>
+
+		<div class="opciones">
+
+			<img
+				src="https://st.depositphotos.com/1011643/2343/i/600/depositphotos_23439498-stock-photo-secretary-answering-telephone.jpg"
+				width="300" height="180">
+
+			<form method="post" action="">
+				<button id="bt1" type="submit">Contactanos</button>
+			</form>
+
+		</div>
+
+	</div>
+
+	<div class="contenedor">
+
+		<div class="opciones">
+
+			<img
+				src="https://ivorydental.ie/wp-content/uploads/2018/05/ivory-dental-dentist-malahide-dublin.jpg"
+				width="300" height="180">
+
+			<form method="post" action="">
+				<button id="bt1" type="submit">Historia de la clínica</button>
+			</form>
+
+		</div>
+
+		<div class="opciones">
+
+			<img
+				src="https://www.antonsl.es/blog/wp-content/uploads/2020/04/equipamiento_clinica_dental_DEs-1.jpg"
+				width="300" height="180">
+
+			<form method="post" action="">
+				<button id="bt1" type="submit">Ayuda</button>
+			</form>
+
+		</div>
 
 	</div>
 
