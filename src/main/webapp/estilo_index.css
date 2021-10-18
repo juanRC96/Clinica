@@ -1,7 +1,6 @@
 Body {
 	font-family: Candara;
-	background-image: url("https://www.teahub.io/photos/full/36-360758_blue-gradient-wallpaper-hd..jpg");
-}
+	background-image: url(https://fondosmil.com/fondo/20891.jpg);}
 
 #menu ul ul {
  display:none;
@@ -54,7 +53,7 @@ Body {
  float:left;
  margin:0;
  padding:0;
- width: 25%;
+ width: 20%;
  text-align: center;
  background-color: #003D66;
 }
@@ -88,12 +87,16 @@ button:hover {
     float: left;
     padding: 40px;
     margin-left: 40px;
-    margin-right: 10px;
+    margin-right: 20px;
     margin-top: 40px;
     margin-bottom: 30px;
-    background-color: #1A5276;
+    background-image: url(https://media.discordapp.net/attachments/351120178408456192/899671823451570197/blue_gradient_background-wallpaper-3840x1600.jpg?width=1440&height=600);
+    border-color: blue;
     text-align: center;
     border-radius: 20px;
+    height: 210px;
+    width: 40%;
+    
 }
 
 .contenedor{
