@@ -6,7 +6,7 @@ Body {
 	opacity: 1;
 	display: flex;
 	min-height: 100vh;
-	font-style:#FFFFFF;
+	font-style: #FFFFFF;
 }
 
 h3 {
@@ -33,7 +33,13 @@ button:hover {
 	opacity: 0.5;
 }
 
-form {
+.volver {
+	position: absolute;
+	bottom: 0;
+	text-align: center;
+}
+
+.login {
 	background-color: #3498DB;
 	margin: auto;
 	width: 90%;
@@ -42,7 +48,6 @@ form {
 	border-radius: 10px;
 	box-shadow: 0 5px 10px -5px rgb(0 0 0/ 30%);
 	text-align: center;
-	
 }
 
 input[type=text], input[type=password] {
