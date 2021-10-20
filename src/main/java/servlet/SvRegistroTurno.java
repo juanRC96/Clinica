@@ -51,7 +51,6 @@ public class SvRegistroTurno extends HttpServlet {
 			String dniString = request.getParameter("dni");
 			String matriculaString = request.getParameter("matricula");
 			String fechaString = request.getParameter("fecha");
-			System.out.print(fechaString);
 			String horaString = request.getParameter("horario");
 
 			if (dniString != "" && matriculaString != "" && fechaString != "" && horaString != "") {
